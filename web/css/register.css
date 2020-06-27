@@ -1,0 +1,52 @@
+.allbox{
+	width:auto;
+	margin-top:40px;
+	text-align:center;
+	height:435px
+	
+}
+.min{
+	line-height:  -webkit-fill-available	;
+}
+.float{
+	float:left;
+	width:198px;
+}
+.float2{
+	display: block;
+	float: left;
+	margin-right:15px;
+	width:180px;
+	text-align:right;
+}
+.display-table{
+	display:table;
+	margin:15px 5px;
+}
+.from-width{
+	width:500px;
+	margin:20px auto;
+}
+b{
+	color: #ff0000;
+}
+.message{
+	position: absolute;
+	right: 450px;
+	top: 74px;
+	width: 170px;
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	text-align: center;
+}
+.message_error{
+	background-color: #ffbbbb45;
+	color: #f00;
+	border: 1px solid #ff006a30;
+}
+.message_ojbk{
+	background-color: #c9ffbb45;
+	color: #00b30f;
+	border: 1px solid #00ff8930;
+}

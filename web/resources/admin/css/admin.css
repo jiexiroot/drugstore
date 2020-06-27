@@ -1,0 +1,116 @@
+*{
+				margin: 0px;
+				padding:0px
+			}
+			.inputbtn{
+				padding:3px
+			}
+			.nav{
+				background-color: #0080ff;
+				height:50px;
+				min-width: 990px;
+			}
+			.nav .navleft{
+				width: 199px;
+				height: 50px;
+				line-height:50px;
+				border-right: 1px solid #31B0D5;
+			}
+			.nav .navleft h3{
+				font: 16px/50px 微软雅黑;
+				margin: 0px;
+				color: #000;
+				font-weight:bolder;
+				text-align: center;
+			}
+			
+			.nav .navright {
+				position: absolute;
+				top:0;
+				left:200px;
+				right: 0px;
+				float: right;
+			}
+			
+			
+			.nav .navright .float{
+				float: right;
+				margin: 12px;
+				text-decoration: none;
+			}
+			
+			.nav .navright span{
+				padding-right:3px ;
+				
+			}
+			
+			.nav .navright .nomargin {
+				width: 40px;
+				height: 40px;
+				float: right;
+                margin: 5px 10px 5px 10px; 		
+                border-radius: 50%;		
+                
+			}
+			
+			.nav .navright .nomargin img{
+				border-radius:50% ;   /* 设置圆形边框 */
+				border: 3px solid ;    /* 设置边框 */
+				width: 40px;
+				height: 40px;
+				float: right;
+                margin: 5px 0px; 				
+			}
+			
+			.nav .navright .img-box .info {
+				position: absolute;
+				top: 50px;
+				right: 10px;
+				z-index: 100;
+				display: none;    /* 平常的时候隐藏 */
+			}
+			
+ 
+			
+			.nav .navright .img-box:hover .info{
+				display: block;
+				opacity: 0.8;		/* 设置透明度，透明度在[0,1]之间  */
+			}				
+			.nav .navright .img-box:hover .info a{    /*a标签是内联元素，不是块元素*/
+				display: block;
+				margin: 10px  0px;		
+			}
+ 
+						
+			.left{
+				width:199px;
+				position: absolute;    /* left 开启了absolute,这里是相对于离它最近的开启了相对定位的元素,这里就是navright  */
+				top: 50px;
+				left: 0;
+				bottom: 0;
+				background-color:#EEEEEE;
+				float: left;
+				z-index: 99;
+				
+			}
+	        .left a{
+	        	display: block;
+	        	text-decoration: none;
+	        	padding: 10px;
+	        	margin: 10px;
+	        	text-align: center;
+	        	border-bottom: 1px solid #000000;
+	        }
+			.content{	
+				text-align:center;			
+				background-color: white;
+				float: left;
+				position: absolute;
+				top: 50px;
+				right: 0px;
+				left: 200px;
+				bottom: 0px;
+				overflow: scroll;
+				border-top: solid 1px #212121;
+				z-index: 99;
+			}

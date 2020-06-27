@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiexi.drug.mapper.UserMapper">
+
+
+    <select id="doLogin" statementType="CALLABLE">
+        {call sp_login(
+            #{user.username,mode=IN,jdbcType=VARCHAR},
+            #{user.password,mode=IN,jdbcType=VARCHAR},
+            #{flag,mode=OUT,jdbcType=INTEGER},
+            #{userid,mode=OUT,jdbcType=INTEGER},
+            #{userN,mode=OUT,jdbcType=VARCHAR})}
+    </select>
+
+    <select id="doRegister" statementType="CALLABLE">
+        {call sp_register(
+             #{user.username,mode=IN,jdbcType=VARCHAR},
+             #{user.password,mode=IN,jdbcType=VARCHAR},
+             #{user.nickName,mode=IN,jdbcType=VARCHAR},
+             #{user.address,mode=IN,jdbcType=VARCHAR},
+             #{user.telphone,mode=IN,jdbcType=VARCHAR},
+             #{flag,mode=OUT,jdbcType=INTEGER})}
+    </select>
+</mapper>

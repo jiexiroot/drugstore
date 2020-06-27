@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiexi.drug.mapper.OrdersMapper">
+    <insert id="addPayInfo">
+        {call sp_addPayInfo(
+            #{ids,mode=IN,jdbcType=VARCHAR},
+            #{price,mode=IN,jdbcType=FLOAT}
+        )}
+    </insert>
+    <update id="addPoint">
+        {call sp_addpoint(
+            #{id,mode=IN,jdbcType=INTEGER},
+            #{price,mode=IN,jdbcType=FLOAT}
+        )}
+    </update>
+
+    <update id="payorder">
+        update `order` set type = 1
+        where orderid in
+        <foreach collection="oids"  item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </update>
+    <select id="addOrder">
+        {call sp_addorder(
+             #{order.uid,mode=IN,jdbcType=INTEGER},
+             #{order.amount,mode=IN,jdbcType=INTEGER},
+             #{order.did,mode=IN,jdbcType=INTEGER},
+             #{order.cid,mode=IN,jdbcType=INTEGER})}
+    </select>
+</mapper>

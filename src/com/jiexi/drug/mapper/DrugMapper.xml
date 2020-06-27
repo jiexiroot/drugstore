@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiexi.drug.mapper.DrugMapper">
+    <select id="selectDrugs" resultType="drugs">
+        select * from drugs limit #{Allpages},30
+    </select>
+
+    <select id="showDrugsByDids" resultType="com.jiexi.drug.pojo.Drugs">
+        select * from drugs
+        where id in
+        <foreach collection="did"  item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </select>
+    <select id="selectLikeDrugs" resultType="com.jiexi.drug.pojo.Drugs">
+        select * from drugs where (DrugName like concat('%',#{message},'%')) or (ShopName like concat('%',#{message},'%'))
+    </select>
+    <select id="selectDrugsByCName" resultType="com.jiexi.drug.pojo.Drugs">
+        select drugs.* from drugs,categories where drugs.CategoryId = categories.id where categories.name like concat('%',#{content},'%')
+    </select>
+
+
+</mapper>

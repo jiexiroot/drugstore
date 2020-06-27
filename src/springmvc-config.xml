@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+   	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	<!--默认的注解映射,同时使用jackson来解析json,若需要使用fastjson则需要自行配置fastjson的bean -->
+	<mvc:annotation-driven/>
+	<!--注意 图片资源文件夹名称不能设置为'image'，会导致图片加载失败；需要配置mvc加载静态资源原因是springDispatcherServlet拦截了所有的请求-->
+	<!-- 第一种： 添加MVC 加载静态文件 css、图片等-->
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/images/" mapping="/images/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/fonts/" mapping="fonts/**"/>
+	<!-- 第二种：  解除servlet对静态资源文件访问的限制，使得静态资源先经过-->
+	<!--	<mvc:default-servlet-handler/>-->
+	<!--配置用户定义的Contreller的实例 -->
+	<context:component-scan base-package="com.jiexi.drug.controller"/>
+	<!-- 配置视图解析器 -->
+
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 指定前缀 -->
+		<property name="prefix" value="/resources/"/>
+		<!-- 指定后缀 -->
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+
+	<!--配置用户定义的Contreller的实例 -->
+	<context:component-scan base-package="com.jiexi.drug.controller"/>
+
+	<!-- 注入fastjson配置类 -->
+	<bean name="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+		<property name="serializerFeatures">
+			<list>
+				<value>WriteMapNullValue</value>
+				<value>WriteMapNullValue</value>
+				<value>WriteNullNumberAsZero</value>
+				<value>WriteNullListAsEmpty</value>
+				<value>WriteNullStringAsEmpty</value>
+				<value>WriteNullBooleanAsFalse</value>
+				<value>WriteDateUseDateFormat</value>
+			</list>
+		</property>
+	</bean>
+
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<!-- 这里配置alibaba 的fastjson -->
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html;charset=UTF-8</value>
+						<value>application/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<!-- 配置 -->
+				<property name="fastJsonConfig" ref="fastJsonConfig">
+
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
+
+</beans>

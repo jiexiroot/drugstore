@@ -1,0 +1,83 @@
+
+.shopbox{
+    border: 1px solid rgb(201, 201, 201);
+    width: 850px;
+    height: 480px;
+    margin: 10px auto;
+}
+.imagebox{
+    display: block;
+    float: left;
+    width: 310px;
+    height: 400px;
+    margin: 30px;
+  
+    border:1px solid #FE6732 ;
+}
+.imagebox img{
+    width: 300px; 
+    height: 390px;
+    margin: 5px;
+}
+.messbox{
+    display: block;
+    float: left;
+    height: 300px;
+    width: 400px;
+    margin-top: 25px;
+}
+.messbox span{
+    font-size: 28px;
+}
+.shopbox p{
+    display: inline-block;
+    font-size: 17px;
+}
+.left{
+    margin-left: 30px;
+    margin-bottom: 20px;
+    height: 36px;
+}
+.red{
+    background-color: #ff0036;
+    border: 1px solid #ff0036;
+    color: #fff;
+    width: 175px;
+    font-family: 'Microsoft Yahei';
+}
+.red:hover{
+    color: #fff;
+    background-color: #ff0037a9;
+    border: 1px solid #ff0037a9;
+}
+.white{
+    background-color: #ffeded;
+    border: 1px solid #FF0036;
+    color: #FF0036;
+    width: 175px;
+    font-family: 'Microsoft Yahei';
+}
+.white:hover{
+    color: #FF0036;
+    background-color: #ffcecead;
+}
+.pro-price {
+    color: #FE6732;
+    display: block;
+    clear: both;
+    padding: 5px 10px 14px;
+    font-family: Georgia;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+.top{
+    margin-top: 8px;
+}
+.width{
+    width: 200px;
+}
+.width-block{
+    width: 200px;
+    margin: 10px auto;
+}
