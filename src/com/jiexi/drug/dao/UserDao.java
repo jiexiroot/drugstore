@@ -1,7 +1,6 @@
 package com.jiexi.drug.dao;
 
 import com.jiexi.drug.pojo.Users;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

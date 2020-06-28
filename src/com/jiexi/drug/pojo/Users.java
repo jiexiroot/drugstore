@@ -12,15 +12,15 @@ public class Users {
   private String address;
   private String telphone;
   private long userRoleId;
-  private long userStateId;
+  private long stateId;
   private java.sql.Timestamp addtime;
 
-  public long getUserStateId() {
-    return userStateId;
+  public long getStateId() {
+    return stateId;
   }
 
-  public void setUserStateId(long userStateId) {
-    userStateId = userStateId;
+  public void setStateId(long stateId) {
+    this.stateId = stateId;
   }
 
   @Override
@@ -33,7 +33,7 @@ public class Users {
             ", address='" + address + '\'' +
             ", telphone='" + telphone + '\'' +
             ", userRoleId=" + userRoleId +
-            ", userStateId=" + userStateId +
+            ", stateId=" + stateId +
             ", addtime=" + addtime +
             '}';
   }
@@ -54,7 +54,7 @@ public class Users {
     this.telphone = telphone;
   }
 
-  public Users(long id, String username, String password, String nickName, String address, String telphone, long userRoleId, long userStateId, Timestamp addtime) {
+  public Users(long id, String username, String password, String nickName, String address, String telphone, long userRoleId, long stateId, Timestamp addtime) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -62,7 +62,7 @@ public class Users {
     this.address = address;
     this.telphone = telphone;
     this.userRoleId = userRoleId;
-    this.userStateId = userStateId;
+    this.stateId = stateId;
     this.addtime = addtime;
   }
 
@@ -128,7 +128,7 @@ public class Users {
     this.userRoleId = userRoleId;
   }
 
-  public Users(long id, String username, String password, String nickName, String address, String telphone, long userRoleId, long userStateId) {
+  public Users(long id, String username, String password, String nickName, String address, String telphone, long userRoleId, long stateId) {
     this.id = id;
     this.username = username;
     this.password = password;
@@ -136,7 +136,7 @@ public class Users {
     this.address = address;
     this.telphone = telphone;
     this.userRoleId = userRoleId;
-    this.userStateId = userStateId;
+    this.stateId = stateId;
   }
 
   public Users() {

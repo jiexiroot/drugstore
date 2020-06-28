@@ -76,27 +76,6 @@ public interface UserMapper {
     // 管理员功能
 
     /**
-     * 显示所有用户
-     * @return
-     */
-    @Select("select id,username,nickname,address,telphone,userRoleId,userStateId from users where id!=1")
-    List<Users> showUser();
-    /**
-     * 恢复登录权限
-     * @param id
-     * @return
-     */
-    @Update("update users set userStateId = 1 where id = #{id}")
-    int abledId(@Param("id") int id);
-    /**
-     * 禁用登录权限
-     * @param id
-     * @return
-     */
-    @Update("update users set userStateId= 2 where id = #{id}")
-    int disabledId(@Param("id")int id);
-
-    /**
      * 查询用户权限
      * @param id
      * @return

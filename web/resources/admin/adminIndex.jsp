@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 引入el表达式 -->
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" scope="session" value="${pageContext.request.contextPath}"/>
 <html>
@@ -19,12 +18,12 @@
 <body class="layui-layout-body">
   <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-      <div class="layui-logo">JX商城后台管理平台</div>
+      <a href="${path}/admin/index" class="layui-logo">JX商城后台管理平台</a>
       <!-- 头部区域（可配合layui已有的水平导航） -->
       <ul class="layui-nav layui-layout-left">
         <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-        <li class="layui-nav-item"><a href="admin/getusers.do">用户管理</a></li>
-        <li class="layui-nav-item"><a href="admin/getschools.do">商品管理</a></li>
+        <li class="layui-nav-item"><a href="${path}/admin/getusers">用户管理</a></li>
+        <li class="layui-nav-item"><a href="${path}/admin/getschools">商品管理</a></li>
       </ul>
       <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item"><a href="javascript:;">
@@ -49,17 +48,17 @@
           <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">商品管理</a>
             <dl class="layui-nav-child">
               <dd>
-                <a href="admin/getschools.do">商品管理</a>
+                <a href="${path}/admin/getschools.do">商品管理</a>
               </dd>
               <dd>
-                <a href="admin/gettasks.do">订单管理</a>
+                <a href="${path}/admin/gettasks.do">订单管理</a>
               </dd>
             </dl></li>
 
           <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">用户管理</a>
             <dl class="layui-nav-child">
               <dd>
-                <a href="admin/getusers.do">用户维护</a>
+                <a href="${path}/admin/getusers">用户维护</a>
               </dd>
             </dl></li>
 
@@ -137,9 +136,9 @@
                 </tr>
                 <tr>
                   <td>状态</td>
-                  <td><c:if test="${nowadmin.userStateId==0 }">
+                  <td><c:if test="${nowadmin.stateId==1 }">
                     正常
-                  </c:if> <c:if test="${nowadmin.userStateId!=0 }">
+                  </c:if> <c:if test="${nowadmin.stateId!=1 }">
                     被限制
                   </c:if></td>
                 </tr>

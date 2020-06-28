@@ -1,6 +1,11 @@
 package com.jiexi.drug.service;
 
+import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Users;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 /**
  * @author GOU
@@ -42,4 +47,21 @@ public interface AdminService {
      * @return
      */
     int setAdmin(String username);
+
+    /**
+     * 查询所有用户的信息并且可以模糊查找
+     * @param useStr
+     * @return
+     */
+    List<Users> getByLikeNameUsers(String useStr);
+
+    /**
+     * 通过uid查询vip信息
+     * @param uid
+     * @return
+     */
+    Member getMemberByUid(String uid);
+
+
+
 }

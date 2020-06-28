@@ -1,9 +1,10 @@
 package com.jiexi.drug.mapper;
 
+import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Users;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 /**
  * @author GOU
@@ -17,6 +18,19 @@ public interface AdminMapper {
      * @return
      */
     @Select("select * from users where id = #{id}")
+    @Results(
+        value = {
+            @Result(id = true, property = "id",column = "Id"),
+            @Result(property = "username",column = "Username"),
+            @Result(property = "password",column = "Password"),
+            @Result(property = "nickName",column = "NickName"),
+            @Result(property = "address",column = "Address"),
+            @Result(property = "telphone",column = "Telphone"),
+            @Result(property = "userRoleId",column = "UserRoleId"),
+            @Result(property = "stateId",column = "UserStateId"),
+            @Result(property = "addtime",column = "Addtime"),
+        }
+    )
     Users selectAdmin(@Param("id")int id);
 
     /**
@@ -51,4 +65,49 @@ public interface AdminMapper {
      */
     @Update("update users set userRoleId = 3 where username = #{username}")
     int setAdmin(@Param("username")String username);
+
+    /**
+     * 查询用户信息
+     * @param useStr
+     * @return
+     */
+    @Select("select * from users where CONCAT(id,username) like #{useStr} and id != 4")
+    @Results(
+        value = {
+            @Result(id = true, property = "id",column = "Id"),
+            @Result(property = "username",column = "Username"),
+            @Result(property = "password",column = "Password"),
+            @Result(property = "nickName",column = "NickName"),
+            @Result(property = "address",column = "Address"),
+            @Result(property = "telphone",column = "Telphone"),
+            @Result(property = "userRoleId",column = "UserRoleId"),
+            @Result(property = "stateId",column = "UserStateId"),
+            @Result(property = "addtime",column = "Addtime"),
+        }
+    )
+    List<Users> getByLikeNameUsers(@Param("useStr") String useStr);
+
+    /**
+     * 查询用户积分与信息
+     * @param uid
+     * @return
+     */
+    @Select("select * from member where userId = #{uid}")
+    Member getMemberByUid(@Param("uid")int uid);
+
+    /**
+     * 恢复登录权限
+     * @param id
+     * @return
+     */
+    @Update("update users set userStateId = 1 where id = #{id}")
+    int abledId(@Param("id") int id);
+
+    /**
+     * 禁用登录权限
+     * @param id
+     * @return
+     */
+    @Update("update users set userStateId= 2 where id = #{id}")
+    int disabledId(@Param("id")int id);
 }

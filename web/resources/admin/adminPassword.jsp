@@ -25,12 +25,12 @@
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">JX商城后台管理平台</div>
+			<a href="${path}/admin/index" class="layui-logo">JX商城后台管理平台</a>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
-				<li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-				<li class="layui-nav-item"><a href="admin/getusers.do">用户管理</a></li>
-				<li class="layui-nav-item"><a href="admin/getschools.do">商品管理</a></li>
+				<li class="layui-nav-item"><a href="${path}/adminIndex.jsp">管理员中心</a></li>
+				<li class="layui-nav-item"><a href="${path}/admin/getusers.do">用户管理</a></li>
+				<li class="layui-nav-item"><a href="${path}/admin/getschools.do">商品管理</a></li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item"><a href="javascript:;">
@@ -55,17 +55,17 @@
 					<li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">商品管理</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="admin/getschools.do">商品管理</a>
+								<a href="${path}/admin/getschools.do">商品管理</a>
 							</dd>
 							<dd>
-								<a href="admin/gettasks.do">订单管理</a>
+								<a href="${path}/admin/gettasks.do">订单管理</a>
 							</dd>
 						</dl></li>
 
 					<li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">用户管理</a>
 						<dl class="layui-nav-child">
 							<dd>
-								<a href="admin/getusers.do">用户维护</a>
+								<a href="${path}/admin/getusers">用户维护</a>
 							</dd>
 						</dl></li>
 

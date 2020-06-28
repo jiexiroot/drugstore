@@ -1,10 +1,9 @@
 package com.jiexi.drug.controller;
 
+import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.AdminService;
-import com.jiexi.drug.service.UserService;
 import com.jiexi.drug.util.MD5;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -116,5 +117,67 @@ public class AdminController {
         session.invalidate();
         session.setAttribute("msg2","退出成功");
         return "main";
+    }
+
+    /**
+     * 查询所有用户信息
+     * @param userstr
+     * @param model
+     * @return
+     */
+    @RequestMapping("getusers")
+    public String getusers(String userstr, Model model){
+        if (userstr != null) {
+            model.addAttribute("userstr","以下是关于'" + userstr + "'的信息");
+            userstr = "%" + userstr + "%";
+        } else {
+            model.addAttribute("userstr","以下全部成员的信息");
+            userstr = "%%";
+        }
+        List<Users> list = adminService.getByLikeNameUsers(userstr);
+        model.addAttribute("list",list);
+        return "admin/adminUser";
+    }
+
+    /**
+     * 用户详情信息
+     * @param uid
+     * @param model
+     * @return
+     */
+    @RequestMapping("getuser")
+    public String getuser(String uid,Model model){
+        Map<String ,Object> objectMap = new HashMap<String, Object>();
+        //查询用户基本信息
+        Users users = adminService.selectAdmin(Integer.parseInt(uid));
+        objectMap.put("user",users);
+        if (users.getUserRoleId() == 2){
+            Member member = adminService.getMemberByUid(uid);
+            objectMap.put("member",member);
+            String vips = null;
+            switch ((int) member.getLevelsId()){
+                case 1:
+                    vips = "黄铜会员";
+                    break;
+                case 2:
+                    vips = "白银会员";
+                    break;
+                case 3:
+                    vips = "黄金会员";
+                    break;
+                case 4:
+                    vips = "钻石会员";
+                    break;
+                case 5:
+                    vips = "终生会员";
+                    break;
+                default:
+                    vips = "";
+                    break;
+            }
+            objectMap.put("vips",vips);
+        }
+        model.addAttribute("userInfo",objectMap);
+        return  "admin/adminUserDetail";
     }
 }

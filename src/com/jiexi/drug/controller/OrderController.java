@@ -202,7 +202,7 @@ public class OrderController {
         try {
             // 调用SDK生成表单
             result = alipayClient.pageExecute(alipayRequest).getBody();
-        } catch (AlipayApiException e) {
+        } catch (com.alipay.api.AlipayApiException e) {
             e.printStackTrace();
         }
 
@@ -240,7 +240,7 @@ public class OrderController {
                 //签名验证失败不处理业务逻辑
                 return "order";
             }
-        } catch (AlipayApiException e) {
+        } catch (com.alipay.api.AlipayApiException e) {
             e.printStackTrace();
             return "order";
         }
@@ -276,7 +276,7 @@ public class OrderController {
                 //跳转支付失败界面
                 return "order";
             }
-        } catch (AlipayApiException e) {
+        } catch (com.alipay.api.AlipayApiException e) {
             e.printStackTrace();
         }
         return "order";

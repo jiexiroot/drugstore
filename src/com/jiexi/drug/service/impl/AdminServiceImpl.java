@@ -1,11 +1,14 @@
 package com.jiexi.drug.service.impl;
 
 import com.jiexi.drug.dao.AdminDao;
+import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.AdminService;
 import com.jiexi.drug.util.MD5;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author GOU
@@ -39,4 +42,15 @@ public class AdminServiceImpl implements AdminService {
     public int setAdmin(String username) {
         return adminDao.setAdmin(username);
     }
+
+    @Override
+    public List<Users> getByLikeNameUsers(String useStr) {
+        return adminDao.getByLikeNameUsers(useStr);
+    }
+
+    @Override
+    public Member getMemberByUid(String uid) {
+        return adminDao.getMemberByUid(Integer.parseInt(uid));
+    }
+
 }

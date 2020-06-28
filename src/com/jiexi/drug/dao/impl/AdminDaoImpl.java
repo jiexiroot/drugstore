@@ -2,9 +2,12 @@ package com.jiexi.drug.dao.impl;
 
 import com.jiexi.drug.dao.AdminDao;
 import com.jiexi.drug.mapper.AdminMapper;
+import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author GOU
@@ -38,5 +41,15 @@ public class AdminDaoImpl implements AdminDao {
     @Override
     public int setAdmin(String username) {
         return adminMapper.setAdmin(username);
+    }
+
+    @Override
+    public List<Users> getByLikeNameUsers(String useStr) {
+        return adminMapper.getByLikeNameUsers(useStr);
+    }
+
+    @Override
+    public Member getMemberByUid(int uid) {
+        return adminMapper.getMemberByUid(uid);
     }
 }
