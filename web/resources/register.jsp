@@ -27,7 +27,7 @@
         <a class="navbar-brand" href="index.jsp">杰希书城</a>
       </div>
       <div>
-        <p class="navbar-text" style="color: #ff3300">翰墨飘香，滋养心灵。</p>
+        <p class="navbar-text" style="color: #ff3300">好货八方供,好货天天销</p>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#"><span class="glyphicon glyphicon-user"></span>

@@ -70,4 +70,35 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.selectDrugInfo((pages-1)*limit,limit,searchStr,cStr,pStr);
     }
 
+    @Override
+    public int disabledId(int id) {
+        return adminDao.disabledId(id);
+    }
+
+    @Override
+    public int abledId(int id) {
+        return adminDao.abledId(id);
+    }
+
+    @Override
+    public Drugs getDrugByDid(int did) {
+        return adminDao.getDrugByDid(did);
+    }
+
+    @Override
+    public String getDrugCName(int cid) {
+        return adminDao.getDrugCName(cid);
+    }
+
+    @Override
+    public String getDrugPName(int pid) {
+        return adminDao.getDrugPName(pid);
+    }
+
+    @Override
+    public int delDrugsById(int did) {
+        return adminDao.delDrugsById(did);
+    }
+
+
 }

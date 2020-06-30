@@ -78,8 +78,11 @@ public class LoginTest {
 //            System.out.println(u);
 //        }
 //        System.out.println(getNowDate_StrToSqlDate());
-        float a = (float) 3.6;
-        System.out.println(Math.ceil(a));
+//        float a = (float) 3.6;
+//        System.out.println(Math.ceil(a));
+        System.out.println(adminMapper.getDrugCName(1));
+        System.out.println(adminMapper.getDrugPName(1));
+
     }
 
 

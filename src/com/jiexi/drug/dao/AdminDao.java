@@ -4,6 +4,7 @@ import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -91,4 +92,45 @@ public interface AdminDao {
      */
     List<Drugs> selectDrugInfo(int index, int limit, String searchStr, String cStr, String pStr);
 
+    /**
+     * 恢复登录权限
+     * @param id
+     * @return
+     */
+    int disabledId(int id);
+
+    /**
+     * 禁用登录权限
+     * @param id
+     * @return
+     */
+    int abledId(int id);
+
+    /**
+     * 根据药品id查询该药品的信息
+     * @param did
+     * @return
+     */
+    Drugs getDrugByDid(int did);
+
+    /**
+     * 根据分类id查找分类名字
+     * @param cid
+     * @return
+     */
+    String getDrugCName(int cid);
+
+    /**
+     * 根据厂商id查找厂商名字
+     * @param pid
+     * @return
+     */
+    String getDrugPName(int pid);
+
+    /**
+     * 根据药品id进行删除
+     * @param did
+     * @return
+     */
+    int delDrugsById(int did);
 }

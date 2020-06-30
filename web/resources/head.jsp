@@ -129,7 +129,7 @@
     </div>
 </nav>
 <div class="header-box">
-    <div class="logo-box"><img src="${pageContext.request.contextPath}/images/logo.png" width="96px" alt="logo"></div>
+    <div class="logo-box"><img src="${pageContext.request.contextPath}/images/logo_ho.png" height="68px" alt="logo"></div>
     <div class="seach-box">
         <div class="input-group">
             <input type="text" id="search_input" placeholder="请输入你需要的商品" class="seach-input">

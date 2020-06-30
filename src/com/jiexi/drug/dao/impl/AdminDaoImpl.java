@@ -70,5 +70,35 @@ public class AdminDaoImpl implements AdminDao {
         return adminMapper.selectDrugInfo(index, limit, searchStr, cStr, pStr);
     }
 
+    @Override
+    public int disabledId(int id) {
+        return adminMapper.disabledId(id);
+    }
+
+    @Override
+    public int abledId(int id) {
+        return adminMapper.abledId(id);
+    }
+
+    @Override
+    public Drugs getDrugByDid(int did) {
+        return adminMapper.getDrugByDid(did);
+    }
+
+    @Override
+    public String getDrugCName(int cid) {
+        return adminMapper.getDrugCName(cid);
+    }
+
+    @Override
+    public String getDrugPName(int pid) {
+        return adminMapper.getDrugPName(pid);
+    }
+
+    @Override
+    public int delDrugsById(int did) {
+        return adminMapper.delDrugsById(did);
+    }
+
 
 }

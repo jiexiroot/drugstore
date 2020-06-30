@@ -9,7 +9,10 @@ import java.util.Date;
  * @Date 2020-06-30 10:32
  */
 public class StringToSqlDate {
-
+    /**
+     * 将String字符串转换为java.sql.Timestamp格式日期,用于数据库保存
+     * @return java.sql.Timestamp类型日期对象（如果转换失败则返回null）
+     */
     public static java.sql.Timestamp getNowDate_StrToSqlDate() {
         //设置日期格式
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

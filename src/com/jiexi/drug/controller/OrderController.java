@@ -144,7 +144,7 @@ public class OrderController {
             resultMap.put("result","1");
             resultMap.put("message","删除成功");
         }else{
-            resultMap.put("     result","0");
+            resultMap.put("result","0");
             resultMap.put("message","空参数");
         }
         return resultMap;

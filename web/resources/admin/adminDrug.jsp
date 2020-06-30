@@ -34,7 +34,7 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-      <li class="layui-nav-item"><a href="${path}/resources/admin/adminUser.jsp">用户管理</a></li>
+      <li class="layui-nav-item"><a href="${path}/admin/getusers">用户管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/admin/adminDrug.jsp">商品管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
     </ul>
@@ -187,6 +187,19 @@
   </div>
 </div>
 <script src="${path}/css/layui/layui.all.js"></script>
+<script>
+  function selectDid(did){
+    //iframe层
+    layer.open({
+      type: 2,
+      title: '药品信息',
+      shadeClose: true,
+      shade: false,
+      area: ['1000px', '650px'],
+      content: '${path}/admin/getDrug?did='+did
+    });
+  }
+</script>
 <script type="text/html" id="buttonBar">
   <a class="layui-btn layui-btn-xs" lay-event="drugDetail">修改/查看商品信息</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -280,27 +293,31 @@
     })
     table.on('tool(orderTable)',obj=>{
       let data = obj.data;
-      if (obj.event === 'userDetail'){
-        selectUid(data.uid)
-      }else if (obj.event === 'drugDetail'){
-        layer.msg(data.did);
+      if (obj.event === 'drugDetail'){
+        selectDid(data.id)
       }else if (obj.event === 'del'){
-        layer.confirm('真的删除该行么', function(index){
-          $.ajax({
-            url:"${path}/api/deleteOrder",
-            type:"post",
-            async:false,
-            data:{'oid':data.oid},
-            success:function(data){
-              let json = $.parseJSON(data);
-              if (data.result == "1"){
-                obj.del();
-                layer.msg("删除成功",{icon: 1});
-              }else{
-                layer.msg("删除失败，订单id不存在",{icon: 2});
+        layer.confirm('是否删除该商品', {btn: ["是","否"], icon: 5, title: '删除'}, function (index) {
+          layer.confirm('确定删除么',{btn: ["确定删除","还是算了"],icon: 2, title: '确定删除'}, function(index){
+            $.ajax({
+              url:"${path}/api/deleteOrder",
+              type:"post",
+              async:false,
+              data:{'did':data.id},
+              success:function(data){
+                let json = $.parseJSON(data);
+                if (data.result == "1"){
+                  obj.del();
+                  layer.msg("删除成功",{icon: 1});
+                }else{
+                  layer.msg("删除失败，商品id不存在",{icon: 2});
+                }
               }
-            }
+            })
+            layer.close(index);
+          }, function (index) {
+            layer.close(index);
           })
+        }, function (index) {
           layer.close(index);
         });
       }
@@ -339,6 +356,7 @@
   });
 
 </script>
+
 <script>
   function logout(path) {
     layer.confirm("是否完全退出本系统",{btn: ['退出','取消'],title: "提示"},()=>{

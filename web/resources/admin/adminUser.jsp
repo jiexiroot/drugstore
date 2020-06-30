@@ -28,7 +28,7 @@
       <!-- 头部区域（可配合layui已有的水平导航） -->
       <ul class="layui-nav layui-layout-left">
         <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-        <li class="layui-nav-item"><a href="${path}/resources/admin/adminUser.jsp">用户管理</a></li>
+        <li class="layui-nav-item"><a href="${path}/admin/getusers">用户管理</a></li>
         <li class="layui-nav-item"><a href="${path}/resources/admin/adminDrug.jsp">商品管理</a></li>
         <li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
       </ul>
@@ -164,10 +164,10 @@
                 </div>
                 <div style="margin-left: 30px;margin-right: 30px;margin-top: 10px;margin-bottom: 30px;">
                   <c:if test="${user.stateId==1 }">
-                    <a href="admin/userclose.do?keys=${keys }&stuidstr=${user.id }" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-radius">限制该用户状态</a>
+                    <a href="${path}/admin/disabled?keys=${keys}&uid=${user.id }" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-radius">限制该用户状态</a>
                   </c:if>
                   <c:if test="${user.stateId!=1 }">
-                    <a href="admin/useropen.do?keys=${keys }&stuidstr=${user.id }" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-radius">解除限制</a>
+                    <a href="${path}/admin/abled?keys=${keys}&uid=${user.id }" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-radius">解除限制</a>
                   </c:if>
                   <a onclick="showDetail(${user.id })" class="layui-btn layui-btn-sm layui-btn-primary layui-btn-radius">用户信息</a>
                 </div>
@@ -192,7 +192,8 @@
   <script src="${path}/css/layui/layui.all.js"></script>
   <c:if test="${!empty msg }">
     <script type="text/javascript">
-      layer.msg("${msg}",{ icon: ${icon},offset: "200px"});
+      let icons = ${icon};
+      layer.msg("${msg}",{ icon: icons,offset: "200px"});
     </script>
   </c:if>
   <script>

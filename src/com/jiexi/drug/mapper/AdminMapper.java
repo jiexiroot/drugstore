@@ -131,7 +131,7 @@ public interface AdminMapper {
     int addDrug(Drugs drugs);
 
     /**
-     * 后台界面查询
+     * 后台药品界面查询
      * @param index
      * @param limit
      * @param searchStr
@@ -157,4 +157,52 @@ public interface AdminMapper {
             }
     )
     List<Drugs> selectDrugInfo(@Param("index")int index,@Param("limit")int limit,@Param("str")String searchStr,@Param("cStr")String cStr,@Param("pStr")String pStr);
+
+    /**
+     * 根据did查询所有信息
+     * @param did
+     * @return
+     */
+    @Select("select * from `drugs` where id = #{did}")
+    @Results(
+            value = {
+                    @Result(id = true, property = "id", column = "id"),
+                    @Result(property = "drugName", column = "drugName"),
+                    @Result(property = "shopName", column = "shopName"),
+                    @Result(property = "approval", column = "approval"),
+                    @Result(property = "publisherId", column = "publisherId"),
+                    @Result(property = "publisherDate", column = "publisherDate"),
+                    @Result(property = "categoryId", column = "categoryId"),
+                    @Result(property = "spec", column = "spec"),
+                    @Result(property = "model", column = "model"),
+                    @Result(property = "imgurl", column = "imgurl"),
+                    @Result(property = "price", column = "price"),
+                    @Result(property = "amount", column = "amount")
+            }
+    )
+    Drugs getDrugByDid(@Param("did")int did);
+
+    /**
+     * 根据分类id查找分类名字
+     * @param cid
+     * @return
+     */
+    @Select("select Name from categories where id = #{cid}")
+    String getDrugCName(@Param("cid")int cid);
+
+    /**
+     * 根据厂商id查找厂商名字
+     * @param pid
+     * @return
+     */
+    @Select("select Name from publishers where id = #{pid}")
+    String getDrugPName(@Param("pid")int pid);
+
+    /**
+     * 根据药品id进行删除
+     * @param did
+     * @return
+     */
+    @Delete("delete from table where id = #{did}")
+    int delDrugsById(@Param("did")int did);
 }

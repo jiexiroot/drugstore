@@ -28,7 +28,7 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-      <li class="layui-nav-item"><a href="${path}/resources/admin/adminUser.jsp">用户管理</a></li>
+      <li class="layui-nav-item"><a href="${path}/admin/getusers">用户管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/admin/adminDrug.jsp">商品管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
     </ul>
@@ -173,6 +173,18 @@
     });
   });
 
+  function selectDid(did){
+    //iframe层
+    layer.open({
+      type: 2,
+      title: '药品信息',
+      shadeClose: true,
+      shade: false,
+      area: ['1000px', '650px'],
+      content: '${path}/admin/getDrug?did='+did
+    });
+  }
+
   function selectUid(uid){
     //iframe层
     layer.open({
@@ -223,7 +235,7 @@
       if (obj.event === 'userDetail'){
         selectUid(data.uid)
       }else if (obj.event === 'drugDetail'){
-        layer.msg(data.did);
+        selectDid(data.did)
       }else if (obj.event === 'del'){
         layer.confirm('真的删除该行么', function(index){
           $.ajax({

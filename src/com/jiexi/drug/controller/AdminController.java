@@ -137,6 +137,7 @@ public class AdminController {
      */
     @RequestMapping("getusers")
     public String getusers(String userstr, Model model){
+        model.addAttribute("keys", userstr);
         if (userstr != null) {
             model.addAttribute("userstr","以下是关于'" + userstr + "'的信息");
             userstr = "%" + userstr + "%";
@@ -238,8 +239,8 @@ public class AdminController {
                 String uuid = UUID.randomUUID()+"";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 dateStr = simpleDateFormat.format(date);
-                String filepath = "C:\\Users\\11636\\IdeaProjects\\drugstore\\out\\artifacts\\drugstore\\images\\products" + "\\" + dateStr+"\\"+uuid+"." + prefix;
-//                String filepath = "/usr/apache-tomcat-9.0.33/webapps/drugstore/images/products" + dateStr+"\\"+uuid+"." + prefix;
+//                String filepath = "C:\\Users\\11636\\IdeaProjects\\drugstore\\out\\artifacts\\drugstore\\images\\products" + "\\" + dateStr+"\\"+uuid+"." + prefix;
+                String filepath = "\\usr\\apache-tomcat-9.0.33\\webapps\\drugstore\\images\\products\\" + dateStr+"\\"+uuid+"." + prefix;
 
 
                 File files=new File(filepath);
@@ -277,14 +278,7 @@ public class AdminController {
 
     }
 
-    /**
-     * 将String字符串转换为java.sql.Timestamp格式日期,用于数据库保存
-     * @param strDate
-     *            表示日期的字符串
-     * @param dateFormat
-     *            传入字符串的日期表示格式（如："yyyy-MM-dd HH:mm:ss"）
-     * @return java.sql.Timestamp类型日期对象（如果转换失败则返回null）
-     */
+
 
     /**
      * 添加药品信息
@@ -312,6 +306,16 @@ public class AdminController {
         return "admin/adminAddDrug";
     }
 
+    /**
+     * 获得药品信息
+     * @param model
+     * @param page
+     * @param limit
+     * @param searchStr
+     * @param cStr
+     * @param pStr
+     * @return
+     */
     @RequestMapping("getDrugs")
     @ResponseBody
     public Map<String,Object> getDrugs(Model model, int page, int limit, String searchStr, String cStr, String pStr){
@@ -341,6 +345,100 @@ public class AdminController {
         resultMap.put("count", 1000);
         resultMap.put("data",list);
 
+        return resultMap;
+    }
+
+    /**
+     * 药品详细详信息
+     * 根据did查询药品
+     * @param did
+     * @return
+     */
+    @RequestMapping("getDrug")
+    public String getDrug(int did, Model model){
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Drugs drugs = adminService.getDrugByDid(did);
+        String cName = adminService.getDrugCName((int) drugs.getCategoryId());
+        String pName = adminService.getDrugCName((int) drugs.getPublisherId());
+        resultMap.put("drugs",drugs);
+        resultMap.put("cName",cName);
+        resultMap.put("pName",pName);
+
+        model.addAttribute("drugsInfo",resultMap);
+        return "admin/adminDrugDetail";
+    }
+
+    /**
+     * 禁止登陆权限
+     * @param keys
+     * @param uid
+     * @param model
+     * @return
+     */
+    @RequestMapping("disabled")
+    public String disabled_Login(String keys,int uid,Model model){
+        if (uid == 0){
+            model.addAttribute("msg", "出现错误");
+            model.addAttribute("icon",2);
+            return getusers(keys,model);
+        }else{
+            if (adminService.disabledId(uid)>0){
+                model.addAttribute("msg", "禁止该账号登陆，修改成功");
+                model.addAttribute("icon",1);
+                return getusers(keys,model);
+
+            }else{
+                model.addAttribute("msg", "修改失败");
+                model.addAttribute("icon",2);
+                return getusers(keys,model);
+            }
+        }
+    }
+
+    /**
+     * 恢复登陆权限
+     * @param keys
+     * @param uid
+     * @param model
+     * @return
+     */
+    @RequestMapping("abled")
+    public String abled_Login(String keys,int uid,Model model){
+        if (uid == 0){
+            model.addAttribute("msg", "出现错误");
+            model.addAttribute("icon",2);
+            return getusers(keys,model);
+        }else{
+            if (adminService.abledId(uid)>0){
+                model.addAttribute("msg", "恢复该账号登陆，修改成功");
+                model.addAttribute("icon",1);
+                return getusers(keys,model);
+
+            }else{
+                model.addAttribute("msg", "修改失败");
+                model.addAttribute("icon",2);
+                return getusers(keys,model);
+            }
+        }
+    }
+
+    /**
+     * 删除商品（建议二次确认）
+     * @param did
+     * @return
+     */
+    @RequestMapping("deleteDrugs")
+    @ResponseBody
+    public Map<String, Object> deleteDrugs(String did){
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        if(!("".equals(did))){
+            adminService.delDrugsById(Integer.parseInt(did));
+            resultMap.put("result","1");
+            resultMap.put("message","删除成功");
+        }else{
+            resultMap.put("result","0");
+            resultMap.put("message","空参数");
+        }
         return resultMap;
     }
 }

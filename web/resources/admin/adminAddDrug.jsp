@@ -29,7 +29,7 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-      <li class="layui-nav-item"><a href="${path}/resources/admin/adminUser.jsp">用户管理</a></li>
+      <li class="layui-nav-item"><a href="${path}/admin/getusers">用户管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/admin/adminDrug.jsp">商品管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
     </ul>
