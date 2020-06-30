@@ -22,7 +22,7 @@
         success: (data) => {
           let json = $.parseJSON(data);
           console.log(json.result)
-          window.location.href="resources/index.jsp"
+          window.location.href="${path}/resources/index.jsp"
         }
       })
     }

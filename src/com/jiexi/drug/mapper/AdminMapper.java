@@ -1,6 +1,7 @@
 package com.jiexi.drug.mapper;
 
 import com.jiexi.drug.pojo.Member;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import org.apache.ibatis.annotations.*;
 
@@ -110,4 +111,13 @@ public interface AdminMapper {
      */
     @Update("update users set userStateId= 2 where id = #{id}")
     int disabledId(@Param("id")int id);
+
+    /**
+     * 查询订单信息并分页
+     * @param index 起始位置
+     * @param limit 分页数量
+     * @return 订单信息
+     */
+    @Select("select * from `order` where CONCAT(orderid,uid) like #{str} limit #{index},#{limit}")
+    List<Order> selectOrderInfo(@Param("index")int index,@Param("limit")int limit,@Param("str")String searchStr);
 }

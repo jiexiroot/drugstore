@@ -3,6 +3,7 @@ package com.jiexi.drug.dao.impl;
 import com.jiexi.drug.dao.AdminDao;
 import com.jiexi.drug.mapper.AdminMapper;
 import com.jiexi.drug.pojo.Member;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -52,4 +53,10 @@ public class AdminDaoImpl implements AdminDao {
     public Member getMemberByUid(int uid) {
         return adminMapper.getMemberByUid(uid);
     }
+
+    @Override
+    public List<Order> selectOrderInfo(int index, int limit, String searchStr) {
+        return adminMapper.selectOrderInfo(index, limit, searchStr);
+    }
+
 }

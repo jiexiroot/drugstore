@@ -2,6 +2,7 @@ package com.jiexi.drug.test;
 
 import com.jiexi.drug.dao.CartDao;
 import com.jiexi.drug.mapper.*;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.DrugService;
 import com.jiexi.drug.service.UserService;
@@ -67,11 +68,10 @@ public class LoginTest {
 //        System.out.println("MD5后再加密：" + MD5.JM(MD5.MD5(s)));
 //        System.out.println("解密为MD5后的：" + MD5.JM(MD5.KL(MD5.MD5(s))));
 //        System.out.println( adminMapper.selectAdmin(1));
-        List<Users> list = adminMapper.getByLikeNameUsers("%%");
-        for (Users u: list) {
-            System.out.println(u);
-        }
-
+//        List<Users> list = adminMapper.getByLikeNameUsers("%%");
+//        for (Users u: list) {
+//            System.out.println(u);
+//        }
     }
 
 }

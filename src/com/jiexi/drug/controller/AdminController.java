@@ -1,6 +1,8 @@
 package com.jiexi.drug.controller;
 
+import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.pojo.Member;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.AdminService;
 import com.jiexi.drug.util.MD5;
@@ -8,13 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author GOU
@@ -179,5 +186,105 @@ public class AdminController {
         }
         model.addAttribute("userInfo",objectMap);
         return  "admin/adminUserDetail";
+    }
+
+    /**
+     * 查询所有订单信息
+     * @return
+     */
+    @RequestMapping("getOrders")
+    @ResponseBody
+    public Map<String,Object> selectOrderInfo(int page,int limit,String searchStr){
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        if (searchStr != null) {
+            searchStr = "%" + searchStr + "%";
+        } else {
+            searchStr = "%%";
+        }
+        List<Order> list = adminService.selectOrderInfo(page,limit,searchStr);
+        if (list == null){
+            resultMap.put("code",1);
+        }else{
+            resultMap.put("code",0);
+        }
+        resultMap.put("msg","解析成功");
+        resultMap.put("count", 1000);
+        resultMap.put("data",list);
+
+        return resultMap;
+    }
+
+    /**
+     * 图片上传
+     * @param file
+     * @return
+     */
+    @RequestMapping("upload")
+    @ResponseBody
+    public Map<String, Object> upload(MultipartFile file){
+        String prefix="";
+        String dateStr="";
+        //保存上传
+        OutputStream out = null;
+        InputStream fileInput=null;
+        try{
+            if(file!=null){
+                String originalName = file.getOriginalFilename();
+                prefix=originalName.substring(originalName.lastIndexOf(".")+1);
+                Date date = new Date();
+                String uuid = UUID.randomUUID()+"";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                dateStr = simpleDateFormat.format(date);
+                String filepath = "C:\\Users\\11636\\IdeaProjects\\drugstore\\out\\artifacts\\drugstore\\images\\products" + "\\" + dateStr+"\\"+uuid+"." + prefix;
+//                String filepath = "/usr/apache-tomcat-9.0.33/webapps/drugstore/images/products" + dateStr+"\\"+uuid+"." + prefix;
+
+
+                File files=new File(filepath);
+                //打印查看上传路径
+                System.out.println(filepath);
+                if(!files.getParentFile().exists()){
+                    files.getParentFile().mkdirs();
+                }
+                file.transferTo(files);
+                Map<String,Object> map2=new HashMap<String, Object>();
+                Map<String,Object> map=new HashMap<String, Object>();
+                map.put("code",0);
+                map.put("msg","");
+                map.put("data",map2);
+                map2.put("src","/images/products/"+ dateStr+"/"+uuid+"." + prefix);
+                return map;
+            }
+
+        }catch (Exception e){
+        }finally{
+            try {
+                if(out!=null){
+                    out.close();
+                }
+                if(fileInput!=null){
+                    fileInput.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+        Map<String,Object> map=new HashMap<>();
+        map.put("code",1);
+        map.put("msg","");
+        return map;
+
+    }
+
+    /**
+     * 添加药品信息
+     * @param drugs
+     * @param model
+     * @return
+     */
+    @RequestMapping("addDrug")
+    @ResponseBody
+    public String addDrug(Drugs drugs,Model model){
+        System.out.println(drugs);
+        
+        return "admin/adminAddDrug";
     }
 }

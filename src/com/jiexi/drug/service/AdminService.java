@@ -1,6 +1,7 @@
 package com.jiexi.drug.service;
 
 import com.jiexi.drug.pojo.Member;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Update;
@@ -62,6 +63,12 @@ public interface AdminService {
      */
     Member getMemberByUid(String uid);
 
-
+    /**
+     * 查询订单信息
+     * @param pages 分页码数
+     * @param limit 分页数量
+     * @return
+     */
+    List<Order> selectOrderInfo(int pages, int limit, String searchStr);
 
 }

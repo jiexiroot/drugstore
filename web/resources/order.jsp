@@ -52,7 +52,7 @@
       </tr>
       <tr>
         <td colspan="5"></td>
-        <td class="w7" colspan="2">商品金额合计：<span class="money js-total">￥60.20</span></td>
+        <td class="w7" colspan="3">商品金额合计：<span class="money js-total">￥60.20</span></td>
       </tr>
       </tbody>
     </table>

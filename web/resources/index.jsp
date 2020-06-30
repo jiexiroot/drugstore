@@ -76,7 +76,7 @@
         <c:forEach items="${dlist}" var="d">
           <div class="item">
             <a class="img" href="../api/showdetails?did=${d.id}">
-              <img src="${path}/images/products/${d.imgurl}-2.jpg" alt="${d.drugName}">
+              <img src="${path}${d.imgurl}" alt="${d.drugName}">
             </a>
             <div class="ewm">
               <a href="../api/showdetails?did=${d.id}" class="name" target="_blank">

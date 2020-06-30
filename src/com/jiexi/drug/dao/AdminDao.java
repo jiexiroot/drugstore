@@ -1,7 +1,10 @@
 package com.jiexi.drug.dao;
 
 import com.jiexi.drug.pojo.Member;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -60,4 +63,12 @@ public interface AdminDao {
      * @return
      */
     Member getMemberByUid(int uid);
+
+    /**
+     * 查询订单信息并分页
+     * @param index 起始位置
+     * @param limit 分页数量
+     * @return 订单信息
+     */
+    List<Order> selectOrderInfo(int index, int limit, String searchStr);
 }

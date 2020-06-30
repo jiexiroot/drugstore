@@ -81,7 +81,7 @@
             %>
             <script>
                 $(function(){
-                    $('nav ul').addClass("nav-width-admin");
+                    $('nav .nav').addClass("nav-width-admin");
                 })
             </script>
             <li><a id='admin' href="${pageContext.request.contextPath}/admin/index"><span class="glyphicon glyphicon-cog"></span>
@@ -91,7 +91,7 @@
             %>
             <script>
                 $(function(){
-                    $('nav ul').addClass("nav-width");
+                    $('nav .nav').addClass("nav-width");
                 })
             </script>
             <%

@@ -34,29 +34,29 @@
         <div class="left">
           <a href="" class="bigpic">
             <div class=zoomPad">
-              <img class="imgzoom" src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+              <img class="imgzoom" src="${path}/${detail.drugs.imgurl}" alt="">
             </div>
             <span class="imgTip">温馨提醒：商品包装因厂家更换频繁，如有不符请以实物为准。</span>
           </a>
           <div class="piccontainer">
             <div class="pic_list">
               <a href="" title="" class="p">
-                <img src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+                <img src="${path}/${detail.drugs.imgurl}" alt="">
               </a>
               <a href="" title="" class="p">
-                <img src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+                <img src="${path}/${detail.drugs.imgurl}" alt="">
               </a>
               <a href="" title="" class="p">
-                <img src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+                <img src="${path}/${detail.drugs.imgurl}" alt="">
               </a>
               <a href="" title="" class="p">
-                <img src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+                <img src="${path}/${detail.drugs.imgurl}" alt="">
               </a>
               <a href="" title="" class="p">
-                <img src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+                <img src="${path}/${detail.drugs.imgurl}" alt="">
               </a>
               <a href="" title="" class="p">
-                <img src="${path}/images/products/${detail.drugs.imgurl}-2.jpg" alt="">
+                <img src="${path}/${detail.drugs.imgurl}" alt="">
               </a>
             </div>
             <a id="arrow_L" class="icons arrow left"></a>

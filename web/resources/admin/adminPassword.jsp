@@ -28,9 +28,10 @@
 			<a href="${path}/admin/index" class="layui-logo">JX商城后台管理平台</a>
 			<!-- 头部区域（可配合layui已有的水平导航） -->
 			<ul class="layui-nav layui-layout-left">
-				<li class="layui-nav-item"><a href="${path}/adminIndex.jsp">管理员中心</a></li>
-				<li class="layui-nav-item"><a href="${path}/admin/getusers.do">用户管理</a></li>
-				<li class="layui-nav-item"><a href="${path}/admin/getschools.do">商品管理</a></li>
+				<li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
+				<li class="layui-nav-item"><a href="${path}/resources/admin/adminIndex.jsp">用户管理</a></li>
+				<li class="layui-nav-item"><a href="${path}/admin/getschools">商品管理</a></li>
+				<li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
 			</ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item"><a href="javascript:;">
@@ -38,6 +39,9 @@
 					<dl class="layui-nav-child">
 						<dd>
 							<a href="adminIndex.jsp">个人信息</a>
+						</dd>
+						<dd>
+							<a href="${path}/resources/admin/adminAddDrug.jsp">药品添加</a>
 						</dd>
 						<dd>
 							<a href="adminPassword.jsp">安全设置</a>
@@ -58,7 +62,7 @@
 								<a href="${path}/admin/getschools.do">商品管理</a>
 							</dd>
 							<dd>
-								<a href="${path}/admin/gettasks.do">订单管理</a>
+								<a href="${path}/resources/admin/adminOrder.jsp">订单管理</a>
 							</dd>
 						</dl></li>
 
@@ -157,6 +161,14 @@
 		</div>
 	</div>
 	<script src="${path}/css/layui/layui.all.js"></script>
+	<c:if test="${empty nowadmin }">
+		<script type="text/javascript">
+			layer.alert("请先登录");
+			setTimeout(()=>{
+				window.location.href="${path}/resources/login.jsp";
+			},1500);
+		</script>
+	</c:if>
 	<script>
 		layui.use([ 'form' ], function() {
 			let form = layui.form,

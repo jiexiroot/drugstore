@@ -2,6 +2,7 @@ package com.jiexi.drug.service.impl;
 
 import com.jiexi.drug.dao.AdminDao;
 import com.jiexi.drug.pojo.Member;
+import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.AdminService;
 import com.jiexi.drug.util.MD5;
@@ -51,6 +52,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Member getMemberByUid(String uid) {
         return adminDao.getMemberByUid(Integer.parseInt(uid));
+    }
+
+    @Override
+    public List<Order> selectOrderInfo(int pages, int limit, String searchStr) {
+        return adminDao.selectOrderInfo( (pages-1)*limit, limit, searchStr);
     }
 
 }

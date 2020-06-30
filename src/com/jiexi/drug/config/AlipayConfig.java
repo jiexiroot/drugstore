@@ -26,10 +26,12 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoDFYeC8Edrxa8uk4OaiHopqxMsNgwMZ8+kJibpvaYyDD2QGYgCibtGDpo+2kTAQKPTEE68T97nHZbi5hlSWoYCewTt4aIYgM4RSOJFfWXkVbdD2S9aDsycDUMjiYriFyDssGCH/FQeTYVAqD0qTg1W9uvhi8Yi+5ynIbP/UXOi5+07MGPXvSqumoNo2zG2ylTAsiEXcGxXnFqOzJ5YfjQ9Go+GX2NAsziF2MgmssWAoJAkvjEMNcyTrwuUmanmUTj4rxLyewJidxAO0YAHVU6dfPY584qjLHNKZmXnPpdlT98UV5OhvFaO+EmR8MUenpm09sHhJF0DBr41Pm9eeTMQIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String notify_url = "http://39.99.211.44:8080/drugstore/notifyUrl";
+//    public static String notify_url = "http://39.99.211.44:8080/drugstore/notifyUrl";
+    public static String notify_url = "http://localhost:8080/drugstore/notifyUrl";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-    public static String return_url = "http://39.99.211.44:8080/drugstore/returnUrl";
+//    public static String return_url = "http://39.99.211.44:8080/drugstore/returnUrl";
+    public static String return_url = "http://localhost:8080/drugstore/returnUrl";
 
     // 签名方式
     public static String sign_type = "RSA2";

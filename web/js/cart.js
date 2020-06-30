@@ -125,7 +125,7 @@ $(function(){
                 </td>
                 <td class="w2">
                   <a target="_blank" href="../api/showdetails?did=${cartList.did}" class="">
-                    <img src="../images/products/${cartList.imgurl}-2.jpg" alt="${cartList.shopName}  ${cartList.drugName}">
+                    <img src="/drugstore/${cartList.imgurl}" alt="${cartList.shopName}  ${cartList.drugName}">
                   </a>
                 </td>
                 <td class="w3" style="width: 470px">

@@ -37,7 +37,7 @@ $(function(){
                 </td>
                 <td class="w2">
                   <a target="_blank" href="/drugstore/api/showdetails?did=${orderList.did}" class="">
-                    <img src="/drugstore/images/products/${orderList.imgurl}-2.jpg" alt="${orderList.shopName}  ${orderList.drugName}">
+                    <img src="/drugstore/${orderList.imgurl}" alt="${orderList.shopName}  ${orderList.drugName}">
                   </a>
                 </td>
                 <td class="w3" style="width: 470px">

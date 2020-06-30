@@ -21,8 +21,9 @@
       <!-- 头部区域（可配合layui已有的水平导航） -->
       <ul class="layui-nav layui-layout-left">
         <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-        <li class="layui-nav-item"><a href="${path}/admin/getusers">用户管理</a></li>
-        <li class="layui-nav-item"><a href="${path}/admin/getschools.do">商品管理</a></li>
+        <li class="layui-nav-item"><a href="${path}/resources/admin/adminIndex.jsp">用户管理</a></li>
+        <li class="layui-nav-item"><a href="${path}/admin/getschools">商品管理</a></li>
+        <li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
       </ul>
       <ul class="layui-nav layui-layout-right">
         <li class="layui-nav-item"><a href="javascript:;">
@@ -47,10 +48,13 @@
           <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">商品管理</a>
             <dl class="layui-nav-child">
               <dd>
-                <a href="${path}/admin/getschools.do">商品管理</a>
+                <a href="${path}/resources/admin/">商品管理</a>
               </dd>
               <dd>
-                <a href="${path}/admin/gettasks.do">订单管理</a>
+                <a href="${path}/resources/admin/adminAddDrug.jsp">药品添加</a>
+              </dd>
+              <dd>
+                <a href="${path}/resources/admin/adminOrder.jsp">订单管理</a>
               </dd>
             </dl></li>
 
