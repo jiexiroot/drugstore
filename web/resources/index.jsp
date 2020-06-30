@@ -12,6 +12,7 @@
   <head>
     <link rel="stylesheet" href="${path}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${path}/css/index.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
     <script src="${path}/js/jquery-3.4.1.js"></script>
     <script src="${path}/js/layer.js"></script>
     <script src="${path}/js/bootstrap.min.js"></script>
@@ -19,11 +20,7 @@
     <title>JX商城</title>
   </head>
   <body>
-  <c:if test="${!empty msg2 }">
-    <script type="text/javascript">
-      layer.msg("${msg2}",{ icon: 1,offset: "200px"});
-    </script>
-  </c:if>
+
   <%
     Object user2=request.getSession().getAttribute("userIF");
     if(null == user2){
@@ -70,9 +67,35 @@
     </div>
     <div class="wrap2">
       <span class="js-title">全部商品</span>
+      <c:if test="${isShow == true}">
+        <div style="display: inline-block; margin-right: 20px;margin-left: 50px">
+          <span>页面选择：</span>
+        </div>
+        <c:forEach begin="0" end="${dLength}" var="dL" varStatus="status">
+          <c:if test="${isChoose == status.index+1}">
+            <div class="choose_box choose">
+              <a href="${path}/api/selectAllBypages?pages=${status.index+1}">${status.index+1}</a>
+            </div>
+          </c:if>
+          <c:if test="${isChoose != status.index+1}">
+            <div class="choose_box none_choose">
+              <a href="${path}/api/selectAllBypages?pages=${status.index+1}">${status.index+1}</a>
+            </div>
+          </c:if>
+        </c:forEach>
+      </c:if>
+      <c:if test="${isShow == false}">
+        <span style="display: inline-block;margin-left:20px;line-height: 50px;height: 50px;font-family: 'Microsoft YaHei';font-size: 18px">${dMessage}</span>
+      </c:if>
     </div>
     <div class="wrap">
       <div class="products">
+        <c:if test="${dlist.size() == 0}">
+          <div style="text-align: center;padding: 20px;color: #ccc;font-family: 'Microsoft YaHei'">
+            <h3>没有找到类似的商品</h3>
+          </div>
+
+        </c:if>
         <c:forEach items="${dlist}" var="d">
           <div class="item">
             <a class="img" href="../api/showdetails?did=${d.id}">
@@ -91,7 +114,31 @@
         </c:forEach>
       </div>
     </div>
+    <div style="margin: 0px auto;height: 30px;width: 300px;text-align: center">
+      <c:if test="${isShow == true}">
+        <div style="display: inline-block; margin-right: 20px">
+          <span>页面选择：</span>
+        </div>
+        <c:forEach begin="0" end="${dLength}" var="dL" varStatus="status">
+          <c:if test="${isChoose == status.index+1}">
+            <div class="choose_box choose">
+              <a href="${path}/api/selectAllBypages?pages=${status.index+1}">${status.index+1}</a>
+            </div>
+          </c:if>
+          <c:if test="${isChoose != status.index+1}">
+            <div class="choose_box none_choose">
+              <a href="${path}/api/selectAllBypages?pages=${status.index+1}">${status.index+1}</a>
+            </div>
+          </c:if>
+        </c:forEach>
+      </c:if>
+    </div>
   </div>
   <jsp:include page="footer.jsp"/>
   </body>
+  <c:if test="${!empty msg2 }">
+    <script type="text/javascript">
+      layer.msg("${msg2}",{ icon: 1,offset: "200px", time: 2000});
+    </script>
+  </c:if>
 </html>

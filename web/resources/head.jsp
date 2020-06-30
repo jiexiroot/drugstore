@@ -9,6 +9,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/head.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
     <script>
         let t = 3;
         $(function(){
@@ -45,6 +46,10 @@
 
             });
         })
+        function search_btn(path){
+            let message = $("#search_input").val();
+            window.location.href = path + "/api/searchPcDrugs?message=" + message;
+        }
     </script>
 </head>
 <body>
@@ -127,8 +132,8 @@
     <div class="logo-box"><img src="${pageContext.request.contextPath}/images/logo.png" width="96px" alt="logo"></div>
     <div class="seach-box">
         <div class="input-group">
-            <input type="text" placeholder="请输入你需要的商品" class="seach-input">
-            <button type="button" class="btn1 st_bg" >搜 索</button>
+            <input type="text" id="search_input" placeholder="请输入你需要的商品" class="seach-input">
+            <button type="button" id="search_btn" onclick="search_btn('${pageContext.request.contextPath}')" class="btn1 st_bg" >搜 索</button>
         </div>
     </div>
 </div>

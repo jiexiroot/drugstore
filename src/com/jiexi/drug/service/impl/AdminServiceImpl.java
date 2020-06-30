@@ -1,6 +1,7 @@
 package com.jiexi.drug.service.impl;
 
 import com.jiexi.drug.dao.AdminDao;
+import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
@@ -57,6 +58,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Order> selectOrderInfo(int pages, int limit, String searchStr) {
         return adminDao.selectOrderInfo( (pages-1)*limit, limit, searchStr);
+    }
+
+    @Override
+    public int addDrug(Drugs drugs) {
+        return adminDao.addDrug(drugs);
+    }
+
+    @Override
+    public List<Drugs> selectDrugInfo(int pages, int limit, String searchStr, String cStr, String pStr) {
+        return adminDao.selectDrugInfo((pages-1)*limit,limit,searchStr,cStr,pStr);
     }
 
 }

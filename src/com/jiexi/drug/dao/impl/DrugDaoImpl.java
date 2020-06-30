@@ -32,4 +32,9 @@ public class DrugDaoImpl implements DrugDao {
     public List<Drugs> selectLikeDrugs(String message) {
         return drugMapper.selectLikeDrugs(message);
     }
+
+    @Override
+    public int selectDrugNum() {
+        return drugMapper.selectDrugNum();
+    }
 }

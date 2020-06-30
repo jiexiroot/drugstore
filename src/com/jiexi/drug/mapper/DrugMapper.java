@@ -70,4 +70,11 @@ public interface DrugMapper {
      * @return
      */
     List<Drugs> selectDrugsByCName(@Param("content")String content);
+
+    /**
+     * 查找药品总数
+     * @return
+     */
+    @Select("select count(*) from drugs")
+    int selectDrugNum();
 }

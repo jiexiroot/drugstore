@@ -4,6 +4,7 @@ import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,26 @@ public class DrugController {
     @Autowired
     DrugService drugService;
 
+    /**
+     * 分页查询商品
+     * @param pages
+     * @param model
+     * @return
+     */
+    @RequestMapping("/api/selectAllBypages")
+    public String selectAllByPages(String pages, Model model){
+        model.addAttribute("dlist",drugService.selectDrugs(Integer.parseInt(pages)));
+        model.addAttribute("isChoose",Integer.parseInt(pages));
+        model.addAttribute("isShow",true);
+        return "index";
+    }
+
+    /**
+     * 加载所有第一页商品
+     * @param pages
+     * @param session
+     * @return
+     */
     @RequestMapping("/api/selectAll")
     @ResponseBody
     @CrossOrigin
@@ -36,6 +57,9 @@ public class DrugController {
             resultMap.put("result","1");
             resultMap.put("message",drugsList);
             session.setAttribute("dlist",drugsList);
+            session.setAttribute("dLength",drugService.selectDrugNum());
+            session.setAttribute("isShow",true);
+            session.setAttribute("isChoose",Integer.parseInt(pages));
         }
         return resultMap;
     }
@@ -70,6 +94,11 @@ public class DrugController {
         return "drugDetail";
     }
 
+    /**
+     * 手机端搜索
+     * @param message
+     * @return
+     */
     @RequestMapping("/api/SearchDrugs")
     @ResponseBody
     public Map<String,Object> selectDrugByMessage(String message){
@@ -83,4 +112,14 @@ public class DrugController {
         }
         return resultMap;
     }
+
+    @RequestMapping("/api/searchPcDrugs")
+    public String selectDrugsOnPC(String message, Model model){
+        List<Drugs> drugsList = drugService.selectLikeDrugs(message);
+        model.addAttribute("dlist",drugsList);
+        model.addAttribute("dMessage","以下是关于'"+ message +"'的内容");
+        model.addAttribute("isShow",false);
+        return "index";
+    }
+
 }

@@ -13,7 +13,13 @@
   <link rel="stylesheet" href="${path}/css/layui/css/layui.css">
   <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
   <script src="${path}/js/jquery-3.4.1.js"></script>
-  <title>订单管理</title>
+  <title>药品管理</title>
+  <style>
+    .layui-table-cell{
+      height: 55px;
+      line-height: 55px;
+    }
+  </style>
 </head>
 <c:if test="${empty nowadmin }">
   <script type="text/javascript">
@@ -54,13 +60,13 @@
 
         <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
-            <dd>
+            <dd class="layui-this">
               <a href="${path}/resources/admin/adminDrug.jsp">药品管理</a>
             </dd>
             <dd>
               <a href="${path}/resources/admin/adminAddDrug.jsp">药品添加</a>
             </dd>
-            <dd class="layui-this">
+            <dd>
               <a href="${path}/resources/admin/adminOrder.jsp">订单管理</a>
             </dd>
           </dl></li>
@@ -103,33 +109,68 @@
             class="layui-badge-dot layui-bg-gray"></span>
           <fieldset class="layui-elem-field layui-field-title"
                     style="margin-top: 30px;">
-            <legend>订单管理</legend>
+            <legend>药品管理</legend>
           </fieldset>
         </div>
       </div>
 
       <div class="layui-row">
-        <div class="layui-col-md1">&nbsp;</div>
-        <div class="layui-col-md10">
+        <div class="layui-col-md12">
           <fieldset class="layui-elem-field">
-            <legend>订单查询</legend>
-              <div class="layui-form-item layui-col-md5">
-                <label class="layui-form-label">查询条件</label>
-                <div class="layui-input-block">
-                  <input type="text" name="userstr" placeholder="请输入查询条件（可以为订单ID/用户ID）"
-                         autocomplete="off" class="layui-input">
+            <legend>药品查询</legend>
+              <form class="layui-form">
+                <div class="layui-form-item">
+                  <div class="layui-inline">
+                    <label class="layui-form-label">查询条件</label>
+                    <div class="layui-input-block" style="width: 290px">
+                      <input type="text" name="userstr" placeholder="请输入查询条件（可以为通用名/药品名）"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 80px;">生产厂商</label>
+                    <div class="layui-input-inline" style="width: 250px">
+                      <select name="publisherId" lay-search="">
+                        <option value="">--请选择--</option>
+                        <option value="1">JX商城测试有限公司</option>
+                        <option value="2">四川济生堂药业有限公司</option>
+                        <option value="3">江西川奇药业有限公司</option>
+                        <option value="4">广州市龙力贸易发展有限公司</option>
+                        <option value="5">LifeScan Europe</option>
+                        <option value="6">南京白敬宇制药有限责任公司</option>
+                        <option value="7">青岛伦敦杜蕾斯有限公司</option>
+                        <option value="8">东阿阿胶股份有限公司</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <label class="layui-form-label" style="width: 50px;">类别</label>
+                    <div class="layui-input-inline">
+                      <select name="categoryId" lay-search="">
+                        <option value="">--请选择--</option>
+                        <option value="1">中西药品</option>
+                        <option value="2">养生保健</option>
+                        <option value="3">医疗器械</option>
+                        <option value="4">计生用品</option>
+                        <option value="5">中药饮片</option>
+                        <option value="6">美容护肤</option>
+                        <option value="7">其他</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="layui-inline">
+                    <button  type="button" class="layui-btn layui-btn-normal" style="margin: 0px 10px"><i class="layui-icon layui-icon-search"></i>查询</button>
+                  </div>
                 </div>
-              </div>
-              <button  type="button"   class="layui-btn layui-btn-normal" style="margin: 0px 10px"><i class="layui-icon layui-icon-search"></i>查询</button>
+              </form>
           </fieldset>
         </div>
       </div>
 
       <div class="layui-row">
-        <div class="layui-col-md1">&nbsp;</div>
-        <div class="layui-col-md10">
+        <div class="layui-col-md12">
           <fieldset class="layui-elem-field">
-            <legend>订单结果</legend>
+            <legend>药品结果</legend>
             <table class="layui-hide" id="table" lay-filter="orderTable"></table>
           </fieldset>
         </div>
@@ -147,19 +188,48 @@
 </div>
 <script src="${path}/css/layui/layui.all.js"></script>
 <script type="text/html" id="buttonBar">
-  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="userDetail">查看用户信息</a>
-  <a class="layui-btn layui-btn-xs" lay-event="drugDetail">查看商品信息</a>
+  <a class="layui-btn layui-btn-xs" lay-event="drugDetail">修改/查看商品信息</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="toolbar">
   <p>通过点击每行的操作按钮获得详情信息</p>
 </script>
 <%-- 支付字段替换 --%>
-<script type="text/html" id="payInfo">
-  {{# if (d.type==1) { }}
- 		  <span style="color: #009688">已支付</span>
-  {{# } else{ }}  
-      <span style="color: #FF5722">未支付</span>
+<script type="text/html" id="cBox">
+  {{# if (d.categoryId==1) { }}
+ 		  <span>中西药品</span>
+  {{# } else if(d.categoryId=== 2) { }}
+      <span>养生保健</span>
+  {{# } else if(d.categoryId=== 3) { }}
+      <span>医疗器械</span>
+  {{# } else if(d.categoryId=== 4) { }}
+      <span>计生用品</span>
+  {{# } else if(d.categoryId=== 5) { }}
+      <span>中药饮片</span>
+  {{# } else if(d.categoryId=== 6) { }}
+      <span>美容护肤</span>
+  {{# } else if(d.categoryId=== 7) { }}
+      <span>其他</span>
+  {{# }}} 
+</script>
+<script type="text/html" id="imgBox">
+  <img width="50px" src="${path}/{{d.imgurl}}" alt="图片加载失败">
+</script>
+<script type="text/html" id="pBox">
+  {{# if (d.publisherId==1) { }}
+ 		  <span>JX商城测试有限公司</span>
+  {{# } else if(d.publisherId=== 2) { }}
+      <span>四川济生堂药业有限公司</span>
+  {{# } else if(d.publisherId=== 3) { }}
+      <span>江西川奇药业有限公司</span>
+  {{# } else if(d.publisherId=== 4) { }}
+      <span>广州市龙力贸易发展有限公司</span>
+  {{# } else if(d.publisherId=== 5) { }}
+      <span>LifeScan Europe</span>
+  {{# } else if(d.publisherId=== 6) { }}
+      <span>南京白敬宇制药有限责任公司</span>
+  {{# } else if(d.publisherId=== 7) { }}
+      <span>青岛伦敦杜蕾斯有限公司</span>
   {{# }}} 
 </script>
 <script>
@@ -173,18 +243,6 @@
     });
   });
 
-  function selectUid(uid){
-    //iframe层
-    layer.open({
-      type: 2,
-      title: '用户信息',
-      shadeClose: true,
-      shade: false,
-      area: ['1000px', '650px'],
-      content: '${path}/admin/getuser?uid='+uid
-    });
-  }
-
   layui.use('table', function(){
     let table = layui.table;
 
@@ -193,7 +251,7 @@
       elem: '#table'
       ,id: 'orderT'
       ,height: 470
-      ,url: '${path}/admin/getOrders' //数据接口
+      ,url: '${path}/admin/getDrugs' //数据接口
       ,title: '订单'
       ,toolbar: '#toolbar'
       ,defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
@@ -203,13 +261,15 @@
       }]
       ,page: true //开启分页
       ,cols: [[ //表头
-        {field: 'orderid', title: '订单ID', width:80, sort: true, align: 'center' , fixed: 'left'}
-        ,{field: 'uid', title: '用户ID', align: 'center' , width:80, templet: '#uidTel'}
-        ,{field: 'amount', title: '购买数量', align: 'center' , width:120, sort: true}
-        ,{field: 'type', title: '是否支付', align: 'center' , width:120 ,templet: '#payInfo'}
-        ,{field: 'shopdate', title: '购买时间',align: 'center' , width: 180}
-        ,{field: 'did', title: '商品ID', align: 'center' , width: 80, sort: true}
-        ,{field: 'cid', title: '购物车ID', align: 'center' , width: 110, sort: true}
+        {field: 'id', title: '药品ID', width:80, sort: true, align: 'center' , fixed: 'left'}
+        ,{field: 'imgurl', title: '图片', align: 'center' , width:80, templet: '#imgBox'}
+        ,{field: 'drugName', title: '通用名', align: 'center' , width:120, sort: true}
+        ,{field: 'publisherId', title: '厂商名',align: 'center' , width: 177, templet: '#pBox'}
+        ,{field: 'categoryId', title: '种类', align: 'center' , width: 90, templet: '#cBox'}
+        ,{field: 'model', title: '剂型', align: 'center' , width: 108 }
+        ,{field: 'price', title: '价格', align: 'center', width: 80, sort: true}
+        ,{field: 'amount', title: '库存数量', align: 'center', width: 95}
+        ,{field: 'publishDate', title: '上架时间', align: 'center', width: 180, sort: true}
         ,{fixed: 'right', title: '操作' ,align: 'center' , toolbar: '#buttonBar'}
       ]]
     });
@@ -246,11 +306,30 @@
       }
     })
     $('.layui-btn').click(function () {
-      let inputVal = $('.layui-input').val()
-      layer.msg("搜索的是包含'" + inputVal + "的结果")
+      let inputVal = $('.layui-input').val();
+      let categoryId = $("[name='categoryId']").val();
+      let publisherId = $("[name='publisherId']").val();
+      let longStr = "";
+      if (inputVal.length !=0) {
+        longStr += "'" + inputVal + "'，";
+      }
+      if( categoryId.length !=0) {
+        longStr += " '" + $("[name='categoryId'] option[value= '" + categoryId + "']").html() + "'，";
+      }
+      if( publisherId.length !=0){
+        longStr += " '" + $("[name='publisherId'] option[value= '" + publisherId + "']").html() + "'";
+      }
+      if (longStr.length ==0){
+        layer.msg("未填入搜索值，遍历输出所有药品数据")
+      }else{
+        layer.msg("搜索的是包含{" + longStr + "}的结果")
+      }
+
       table.reload('orderT', {
         where: {
-          'searchStr' : inputVal
+          'searchStr' : inputVal,
+          'cStr': categoryId,
+          'pStr': publisherId
         }
         ,page: {
           curr: 1
@@ -268,9 +347,6 @@
       layer.close(index)
     })
   }
-</script>
-<script type="text/html" id="uidTel">
-  <a href="javascript:void(0)" class="layui-table-link" onclick="selectUid('{{d.uid}}')">{{ d.uid }}</a>
 </script>
 </body>
 </html>

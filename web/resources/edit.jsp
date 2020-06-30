@@ -6,11 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="../css/me.css">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
 <script src="../js/jquery-3.4.1.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 	<script src="../js/layer.js"></script>
 <script src="../js/edit.js"></script>
-<title>Insert title here</title>
+<title>修改密码</title>
 </head>
 <body>
 	<jsp:include page="head.jsp"></jsp:include>

@@ -11,8 +11,16 @@
 <html>
 <head>
   <link rel="stylesheet" href="${path}/css/layui/css/layui.css">
+  <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
   <title>用户详情信息</title>
 </head>
+<c:if test="${empty nowadmin }">
+  <script type="text/javascript">
+    alert("请先登录");
+    window.location.href="${path}/resources/login.jsp";
+  </script>
+</c:if>
+
 <body>
   <!-- 内容主体区域-->
   <div class="layui-container">

@@ -10,7 +10,12 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.jiexi.drug.util.StringToSqlDate.getNowDate_StrToSqlDate;
 
 /**
  * @author GOU
@@ -72,6 +77,11 @@ public class LoginTest {
 //        for (Users u: list) {
 //            System.out.println(u);
 //        }
+//        System.out.println(getNowDate_StrToSqlDate());
+        float a = (float) 3.6;
+        System.out.println(Math.ceil(a));
     }
+
+
 
 }

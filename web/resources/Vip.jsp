@@ -10,6 +10,7 @@
 <head>
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/vip.css">
+  <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
   <script src="../js/jquery-3.4.1.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script src="../js/layer.js"></script>

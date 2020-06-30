@@ -1,5 +1,6 @@
 package com.jiexi.drug.mapper;
 
+import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
@@ -120,4 +121,40 @@ public interface AdminMapper {
      */
     @Select("select * from `order` where CONCAT(orderid,uid) like #{str} limit #{index},#{limit}")
     List<Order> selectOrderInfo(@Param("index")int index,@Param("limit")int limit,@Param("str")String searchStr);
+
+    /**
+     * 添加药品
+     * @param drugs
+     * @return
+     */
+    @Insert("insert into drugs(drugName,shopName,approval,publisherId,publishDate,categoryId,spec,model,imgurl,price,amount) values (#{drugName},#{shopName},#{approval},#{publisherId},#{publishDate},#{categoryId},#{spec},#{model},#{imgurl},#{price},#{amount})")
+    int addDrug(Drugs drugs);
+
+    /**
+     * 后台界面查询
+     * @param index
+     * @param limit
+     * @param searchStr
+     * @param cStr
+     * @param pStr
+     * @return
+     */
+    @Select("select * from `drugs` where drugName like #{str} and categoryId like #{cStr} and publisherId like #{pStr} limit #{index},#{limit}")
+    @Results(
+            value = {
+                    @Result(id = true, property = "id", column = "id"),
+                    @Result(property = "drugName", column = "drugName"),
+                    @Result(property = "shopName", column = "shopName"),
+                    @Result(property = "approval", column = "approval"),
+                    @Result(property = "publisherId", column = "publisherId"),
+                    @Result(property = "publisherDate", column = "publisherDate"),
+                    @Result(property = "categoryId", column = "categoryId"),
+                    @Result(property = "spec", column = "spec"),
+                    @Result(property = "model", column = "model"),
+                    @Result(property = "imgurl", column = "imgurl"),
+                    @Result(property = "price", column = "price"),
+                    @Result(property = "amount", column = "amount")
+            }
+    )
+    List<Drugs> selectDrugInfo(@Param("index")int index,@Param("limit")int limit,@Param("str")String searchStr,@Param("cStr")String cStr,@Param("pStr")String pStr);
 }

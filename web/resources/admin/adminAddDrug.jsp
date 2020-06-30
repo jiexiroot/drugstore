@@ -12,9 +12,16 @@
 <head>
   <title>添加药品</title>
   <link rel="stylesheet" href="${path}/css/layui/css/layui.css">
+  <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
   <style>
   </style>
 </head>
+<c:if test="${empty nowadmin }">
+  <script type="text/javascript">
+    alert("请先登录");
+    window.location.href="${path}/resources/login.jsp";
+  </script>
+</c:if>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
@@ -22,8 +29,8 @@
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="adminIndex.jsp">管理员中心</a></li>
-      <li class="layui-nav-item"><a href="${path}/resources/admin/adminIndex.jsp">用户管理</a></li>
-      <li class="layui-nav-item"><a href="${path}/admin/getschools">商品管理</a></li>
+      <li class="layui-nav-item"><a href="${path}/resources/admin/adminUser.jsp">用户管理</a></li>
+      <li class="layui-nav-item"><a href="${path}/resources/admin/adminDrug.jsp">商品管理</a></li>
       <li class="layui-nav-item"><a href="${path}/resources/main.jsp">返回商城页面</a></li>
     </ul>
     <ul class="layui-nav layui-layout-right">
@@ -37,7 +44,7 @@
             <a href="adminPassword.jsp">安全设置</a>
           </dd>
         </dl></li>
-      <li class="layui-nav-item"><a href="${path}/admin/logout">退出登录</a></li>
+      <li class="layui-nav-item"><a href="javascript:void(0)" onclick="logout('${path}')">退出登录</a></li>
     </ul>
   </div>
 
@@ -49,7 +56,7 @@
         <li class="layui-nav-item layui-nav-itemed"><a href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
             <dd>
-              <a href="${path}/resources/admin/">商品管理</a>
+              <a href="${path}/resources/admin/adminDrug.jsp">药品管理</a>
             </dd>
             <dd class="layui-this">
               <a href="${path}/resources/admin/adminAddDrug.jsp">药品添加</a>
@@ -267,17 +274,9 @@
   </div>
 </div>
 <script src="${path}/css/layui/layui.all.js"></script>
-<c:if test="${empty nowadmin }">
-  <script type="text/javascript">
-    layer.alert("请先登录");
-    setTimeout(()=>{
-      window.location.href="${path}/resources/login.jsp";
-    },1500);
-  </script>
-</c:if>
 <c:if test="${!empty msg }">
   <script type="text/javascript">
-    layer.msg("${msg}",{ icon: ${icon},offset: "200px"});
+    layer.msg("${addMsg}",{ icon: ${addMsgId},offset: "200px"});
   </script>
 </c:if>
 <script>
@@ -323,6 +322,15 @@
 
 
   });
+</script>
+<script>
+  function logout(path) {
+    layer.confirm("是否完全退出本系统",{btn: ['退出','取消'],title: "提示"},()=>{
+      window.location.href = path + "/admin/logout";
+    },(index)=>{
+      layer.close(index)
+    })
+  }
 </script>
 </body>
 </html>

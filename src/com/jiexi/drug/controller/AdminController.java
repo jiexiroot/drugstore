@@ -6,6 +6,7 @@ import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.AdminService;
 import com.jiexi.drug.util.MD5;
+import com.jiexi.drug.util.StringToSqlDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -122,7 +125,7 @@ public class AdminController {
     @RequestMapping("logout")
     public String logout(HttpSession session,Model model){
         session.invalidate();
-        session.setAttribute("msg2","退出成功");
+        model.addAttribute("msg2","退出成功");
         return "main";
     }
 
@@ -275,16 +278,69 @@ public class AdminController {
     }
 
     /**
+     * 将String字符串转换为java.sql.Timestamp格式日期,用于数据库保存
+     * @param strDate
+     *            表示日期的字符串
+     * @param dateFormat
+     *            传入字符串的日期表示格式（如："yyyy-MM-dd HH:mm:ss"）
+     * @return java.sql.Timestamp类型日期对象（如果转换失败则返回null）
+     */
+
+    /**
      * 添加药品信息
      * @param drugs
      * @param model
      * @return
      */
     @RequestMapping("addDrug")
-    @ResponseBody
-    public String addDrug(Drugs drugs,Model model){
+    public String addDrug(Drugs drugs,Model model,String spec_1,String spec_2){
+
+        String spec = spec_1 + "/" + spec_2;
+        java.sql.Timestamp timestamp = StringToSqlDate.getNowDate_StrToSqlDate();
+        drugs.setPublishDate(timestamp);
+        drugs.setSpec(spec);
+
         System.out.println(drugs);
-        
+        int s = adminService.addDrug(drugs);
+        if (s == 1){
+            model.addAttribute("addMsg",drugs.getDrugName() +",添加成功");
+            model.addAttribute("addMsgId",1);
+        }else{
+            model.addAttribute("addMsg","添加失败");
+            model.addAttribute("addMsgId",2);
+        }
         return "admin/adminAddDrug";
+    }
+
+    @RequestMapping("getDrugs")
+    @ResponseBody
+    public Map<String,Object> getDrugs(Model model, int page, int limit, String searchStr, String cStr, String pStr){
+        Map<String,Object> resultMap = new HashMap<String, Object>();
+        if (searchStr != null) {
+            searchStr = "%" + searchStr + "%";
+        } else {
+            searchStr = "%%";
+        }
+        if (cStr != null) {
+            cStr = "%" + cStr + "%";
+        } else {
+            cStr = "%%";
+        }
+        if (pStr != null) {
+            pStr = "%" + pStr + "%";
+        } else {
+            pStr = "%%";
+        }
+        List<Drugs> list = adminService.selectDrugInfo(page,limit,searchStr,cStr,pStr);
+        if (list == null){
+            resultMap.put("code",1);
+        }else{
+            resultMap.put("code",0);
+        }
+        resultMap.put("msg","解析成功");
+        resultMap.put("count", 1000);
+        resultMap.put("data",list);
+
+        return resultMap;
     }
 }

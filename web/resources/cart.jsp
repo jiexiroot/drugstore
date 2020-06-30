@@ -17,6 +17,7 @@
   <script src="${path}/js/bootstrap.min.js"></script>
   <script src="${path}/js/cart.js"></script>
   <link rel="stylesheet" href="${path}/css/cart.css">
+  <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
 </head>
 <body>
   <jsp:include page="head.jsp"></jsp:include>

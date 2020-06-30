@@ -5,6 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="../css/bootstrap.min.css">
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
 <link rel="stylesheet" href="../css/me.css">
 <script src="../js/jquery-3.4.1.js"></script>
 <script src="../js/bootstrap.min.js"></script>

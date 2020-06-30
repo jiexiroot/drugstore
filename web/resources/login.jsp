@@ -13,6 +13,7 @@
     <title>登录界面</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
     <script src="${pageContext.request.contextPath}/js/jquery-3.4.1.js"></script>
     <script src="${pageContext.request.contextPath}/js/layer.js"></script>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>

@@ -1,5 +1,6 @@
 package com.jiexi.drug.service;
 
+import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
@@ -71,4 +72,21 @@ public interface AdminService {
      */
     List<Order> selectOrderInfo(int pages, int limit, String searchStr);
 
+    /**
+     * 添加药品
+     * @param drugs
+     * @return
+     */
+    int addDrug(Drugs drugs);
+
+    /**
+     * 后台查询药品
+     * @param pages
+     * @param limit
+     * @param searchStr
+     * @param cStr
+     * @param pStr
+     * @return
+     */
+    List<Drugs> selectDrugInfo(int pages, int limit, String searchStr, String cStr, String pStr);
 }

@@ -31,4 +31,11 @@ public interface DrugService {
      * @return
      */
     List<Drugs> selectLikeDrugs(String message);
+
+
+    /**
+     * 查找药品总数 每页30个
+     * @return
+     */
+    int selectDrugNum();
 }

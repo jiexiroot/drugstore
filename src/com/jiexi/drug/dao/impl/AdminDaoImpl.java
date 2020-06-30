@@ -2,6 +2,7 @@ package com.jiexi.drug.dao.impl;
 
 import com.jiexi.drug.dao.AdminDao;
 import com.jiexi.drug.mapper.AdminMapper;
+import com.jiexi.drug.pojo.Drugs;
 import com.jiexi.drug.pojo.Member;
 import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
@@ -58,5 +59,16 @@ public class AdminDaoImpl implements AdminDao {
     public List<Order> selectOrderInfo(int index, int limit, String searchStr) {
         return adminMapper.selectOrderInfo(index, limit, searchStr);
     }
+
+    @Override
+    public int addDrug(Drugs drugs) {
+        return adminMapper.addDrug(drugs);
+    }
+
+    @Override
+    public List<Drugs> selectDrugInfo(int index, int limit, String searchStr, String cStr, String pStr) {
+        return adminMapper.selectDrugInfo(index, limit, searchStr, cStr, pStr);
+    }
+
 
 }

@@ -12,6 +12,7 @@
   <title>注册界面</title>
   <link rel="stylesheet" href="${path}/css/bootstrap.min.css">
   <link rel="stylesheet" href="${path}/css/register.css">
+  <link rel="icon" href="${pageContext.request.contextPath}/images/logo.ico" type="image/ico" />
   <script src="${path}/js/jquery-3.4.1.js"></script>
   <script src="${path}/js/layer.js"></script>
   <script src="${path}/js/bootstrap.min.js"></script>

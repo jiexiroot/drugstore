@@ -31,4 +31,10 @@ public interface DrugDao {
      * @return
      */
     List<Drugs> selectLikeDrugs(String message);
+
+    /**
+     * 查找药品总数
+     * @return
+     */
+    int selectDrugNum();
 }

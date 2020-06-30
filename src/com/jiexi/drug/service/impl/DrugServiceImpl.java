@@ -40,4 +40,11 @@ public class DrugServiceImpl implements DrugService {
     public List<Drugs> selectLikeDrugs(String message) {
         return drugDao.selectLikeDrugs(message);
     }
+
+    @Override
+    public int selectDrugNum() {
+        float Pages = drugDao.selectDrugNum()/30;
+        int Pages_int = (int) Math.ceil(Pages);
+        return Pages_int;
+    }
 }

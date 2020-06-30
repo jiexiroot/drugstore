@@ -450,3 +450,29 @@ a{
     color: #fff;
     border-color: #0976d4;
 }
+.choose_box{
+    width: 35px;
+    height: 35px;
+    text-align: center;
+    font-size: 16px;
+}
+.choose_box a{
+    line-height: 35px;
+}
+.choose{
+    display: inline-block;
+
+    background: #1E9FFF;
+    border: 1px solid #beefff;
+}
+.choose a{
+    color: #beefff;
+}
+.none_choose{
+    display: inline-block;
+    background-color: #beefff;
+    border: 1px solid #1E9FFF;
+}
+.none_choose a{
+    color: #1E9FFF;
+}
