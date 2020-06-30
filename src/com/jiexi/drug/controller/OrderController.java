@@ -169,14 +169,23 @@ public class OrderController {
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
         String WIDsubject = "JX Drug_Store";
         String WIDbody = "购买界面";
+        String price = request.getParameter("price");
+        Map<String,Object> userIF = (Map<String, Object>) session.getAttribute("userIF");
+        String uid = (String) userIF.get("userid");
+        int lid = orderService.selectLevelsId(Integer.parseInt(uid));
+        if (lid != 0){
+            price = Integer.parseInt(price)*(100 -lid*5)/100 + "";
+        }
         Map<String,Object> objectMap = new HashMap<String,Object>();
         objectMap.put("ids",request.getParameter("ids"));
-        objectMap.put("price",request.getParameter("price"));
+        objectMap.put("price",price);
         session.setAttribute("payInfo",objectMap);
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        String out_trade_no = new String(request.getParameter("ids").getBytes("ISO-8859-1"),"UTF-8");
+        String uuid = UUID.randomUUID()+"";
+        String out_trade_no = new String(request.getParameter("ids").getBytes("ISO-8859-1"),"UTF-8") + uuid;
         //付款金额，必填
-        String total_amount = new String(request.getParameter("price").getBytes("ISO-8859-1"),"UTF-8");
+//        String total_amount = new String(request.getParameter("price").getBytes("ISO-8859-1"),"UTF-8");
+        String total_amount = price;
         //订单名称，必填
         String subject = new String(WIDsubject.getBytes("ISO-8859-1"),"UTF-8");
         //商品描述，可空

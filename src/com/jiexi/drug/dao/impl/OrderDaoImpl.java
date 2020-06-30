@@ -53,4 +53,9 @@ public class OrderDaoImpl implements OrderDao {
         return ordersMapper.showAllOrder(uid);
     }
 
+    @Override
+    public int selectLevelsId(int uid) {
+        return ordersMapper.selectLevelsId(uid);
+    }
+
 }

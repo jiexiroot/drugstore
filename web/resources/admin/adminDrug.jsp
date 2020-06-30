@@ -299,13 +299,13 @@
         layer.confirm('是否删除该商品', {btn: ["是","否"], icon: 5, title: '删除'}, function (index) {
           layer.confirm('确定删除么',{btn: ["确定删除","还是算了"],icon: 2, title: '确定删除'}, function(index){
             $.ajax({
-              url:"${path}/api/deleteOrder",
+              url:"${path}/admin/deleteDrugs",
               type:"post",
               async:false,
               data:{'did':data.id},
               success:function(data){
                 let json = $.parseJSON(data);
-                if (data.result == "1"){
+                if (json.result == "1"){
                   obj.del();
                   layer.msg("删除成功",{icon: 1});
                 }else{

@@ -69,7 +69,12 @@
           <a class="nonexta " href="index.jsp">&lt;&lt;我再逛逛</a>
         </td>
         <td class="w2">
-          商品金额总计（不含运费及包装费）
+          <span>会员可以打折扣(现在免费申请vip)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            商品金额总计(不含运费及包装费)</span>
+
           <span class="money fsize22">￥<span class="num js-cart-total" id="ordertotal">0.00</span></span>
         </td>
         <td class="w3">

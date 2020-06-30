@@ -63,4 +63,12 @@ public interface OrdersMapper {
      */
     @Select("delete from `order` where orderid = #{oid}")
     void deleteOrder(@Param("oid")int oid);
+
+    /**
+     * 获得会员等级
+     * @param uid
+     * @return
+     */
+    @Select("select LevelsId from member where userId=#{userid}")
+    int selectLevelsId(@Param("userid")int uid);
 }

@@ -58,4 +58,11 @@ public interface OrderService {
      * @return
      */
     List<Orders> showAllOrder(int uid);
+
+    /**
+     * 获得会员等级
+     * @param uid
+     * @return
+     */
+    int selectLevelsId(int uid);
 }

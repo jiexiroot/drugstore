@@ -3,6 +3,7 @@ package com.jiexi.drug.dao;
 import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Orders;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -58,4 +59,11 @@ public interface OrderDao {
      * @return
      */
     List<Orders> showAllOrder(int uid);
+
+    /**
+     * 获得会员等级
+     * @param uid
+     * @return
+     */
+    int selectLevelsId(int uid);
 }

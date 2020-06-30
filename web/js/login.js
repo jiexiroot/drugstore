@@ -26,7 +26,7 @@ $(function(){
                     }else{
                         layer.msg('登录成功,1秒后跳转');
                         setTimeout(()=>{
-                            window.location.href="/drugstore/resources/index.jsp"
+                            window.location.href="/drugstore/resources/main.jsp"
                         },1000)
                     }
 

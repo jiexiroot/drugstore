@@ -203,6 +203,6 @@ public interface AdminMapper {
      * @param did
      * @return
      */
-    @Delete("delete from table where id = #{did}")
+    @Delete("delete from `drugs` where id = #{did}")
     int delDrugsById(@Param("did")int did);
 }

@@ -53,4 +53,9 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.showAllOrder(uid);
     }
 
+    @Override
+    public int selectLevelsId(int uid) {
+        return orderDao.selectLevelsId(uid);
+    }
+
 }
