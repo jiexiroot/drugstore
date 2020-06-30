@@ -240,7 +240,7 @@ public class AdminController {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 dateStr = simpleDateFormat.format(date);
 //                String filepath = "C:\\Users\\11636\\IdeaProjects\\drugstore\\out\\artifacts\\drugstore\\images\\products" + "\\" + dateStr+"\\"+uuid+"." + prefix;
-                String filepath = "\\usr\\apache-tomcat-9.0.33\\webapps\\drugstore\\images\\products\\" + dateStr+"\\"+uuid+"." + prefix;
+                String filepath = "/usr/apache-tomcat-9.0.33/webapps/drugstore/images/products/" + dateStr+"/"+uuid+"." + prefix;
 
 
                 File files=new File(filepath);

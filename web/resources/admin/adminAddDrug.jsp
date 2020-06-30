@@ -181,7 +181,7 @@
                   <div class="layui-inline">
                     <label class="layui-form-label">商品规格</label>
                     <div class="layui-input-inline" style="width: 250px;">
-                      <input type="text" name="spec_1" maxlength="13" lay-verify="required" lay-reqtext="商品规格是必填项，岂能为空？"
+                      <input type="text" name="spec_1" lay-verify="required" lay-reqtext="商品规格是必填项，岂能为空？"
                              placeholder="" autocomplete="off" class="layui-input">
                     </div>
                   </div>
@@ -274,7 +274,7 @@
   </div>
 </div>
 <script src="${path}/css/layui/layui.all.js"></script>
-<c:if test="${!empty msg }">
+<c:if test="${!empty addMsg }">
   <script type="text/javascript">
     layer.msg("${addMsg}",{ icon: ${addMsgId},offset: "200px"});
   </script>
