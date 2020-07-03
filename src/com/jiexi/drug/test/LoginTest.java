@@ -6,6 +6,7 @@ import com.jiexi.drug.pojo.Order;
 import com.jiexi.drug.pojo.Users;
 import com.jiexi.drug.service.DrugService;
 import com.jiexi.drug.service.UserService;
+import com.jiexi.drug.util.UUid8;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -80,8 +81,9 @@ public class LoginTest {
 //        System.out.println(getNowDate_StrToSqlDate());
 //        float a = (float) 3.6;
 //        System.out.println(Math.ceil(a));
-        System.out.println(adminMapper.getDrugCName(1));
-        System.out.println(adminMapper.getDrugPName(1));
+//        System.out.println(adminMapper.getDrugCName(1));
+//        System.out.println(adminMapper.getDrugPName(1));
+        System.out.println(UUid8.getShortUuid());
 
     }
 

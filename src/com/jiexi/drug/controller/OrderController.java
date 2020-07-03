@@ -14,6 +14,7 @@ import com.jiexi.drug.pojo.Orders;
 import com.jiexi.drug.service.OrderService;
 import com.jiexi.drug.service.UserService;
 import com.jiexi.drug.util.StringToInt;
+import com.jiexi.drug.util.UUid8;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,7 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import static org.apache.log4j.helpers.LogLog.error;
@@ -174,18 +176,19 @@ public class OrderController {
         String uid = (String) userIF.get("userid");
         int lid = orderService.selectLevelsId(Integer.parseInt(uid));
         if (lid != 0){
-            price = Integer.parseInt(price)*(100 -lid*5)/100 + "";
+            DecimalFormat df = new DecimalFormat("#.00");
+            price = Float.parseFloat(price)*(100 -lid*5)/100 +"";
+            price = df.format( Float.parseFloat(price));
         }
         Map<String,Object> objectMap = new HashMap<String,Object>();
         objectMap.put("ids",request.getParameter("ids"));
         objectMap.put("price",price);
         session.setAttribute("payInfo",objectMap);
         //商户订单号，商户网站订单系统中唯一订单号，必填
-        String uuid = UUID.randomUUID()+"";
-        String out_trade_no = new String(request.getParameter("ids").getBytes("ISO-8859-1"),"UTF-8") + uuid;
+        String out_trade_no = new String(request.getParameter("ids").getBytes("ISO-8859-1"),"UTF-8") + UUid8.getShortUuid();
         //付款金额，必填
 //        String total_amount = new String(request.getParameter("price").getBytes("ISO-8859-1"),"UTF-8");
-        String total_amount = price;
+        String total_amount = new String(price.getBytes("ISO-8859-1"),"UTF-8");
         //订单名称，必填
         String subject = new String(WIDsubject.getBytes("ISO-8859-1"),"UTF-8");
         //商品描述，可空

@@ -23,19 +23,19 @@ public class DrugController {
     @Autowired
     DrugService drugService;
 
-    /**
-     * 分页查询商品
-     * @param pages
-     * @param model
-     * @return
-     */
-    @RequestMapping("/api/selectAllBypages")
-    public String selectAllByPages(String pages, Model model){
-        model.addAttribute("dlist",drugService.selectDrugs(Integer.parseInt(pages)));
-        model.addAttribute("isChoose",Integer.parseInt(pages));
-        model.addAttribute("isShow",true);
-        return "index";
-    }
+        /**
+         * 分页查询商品
+         * @param pages
+         * @param model
+         * @return
+         */
+        @RequestMapping("/api/selectAllBypages")
+        public String selectAllByPages(String pages, Model model){
+            model.addAttribute("dlist",drugService.selectDrugs(Integer.parseInt(pages)));
+            model.addAttribute("isChoose",Integer.parseInt(pages));
+            model.addAttribute("isShow",true);
+            return "index";
+        }
 
     /**
      * 加载所有第一页商品

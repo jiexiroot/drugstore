@@ -30,7 +30,7 @@ public class UserController {
     }
 
     /**
-     * 登陆 请求映射axios中的loginAjax方法
+     * 登陆 请求映射ajax中的loginAjax方法
      * @param loginName
      * @param password
      * @return
